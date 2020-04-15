@@ -10,6 +10,8 @@ import {
     TOGGLE_TIEBREAK,
     INCREASE_TIE_SCORE,
     TOGGLE_DUCE,
+    DECREASE_GAME_POINT,
+    DECREASE_TIE_SCORE,
 } from '../components/actions';
 
 const initialState: InitialStateTypes = {
@@ -134,7 +136,80 @@ function GlobalProvider({ children }: GlobalProviderType) {
                     };
                 }
                 return state;
+            case DECREASE_TIE_SCORE:
+                if (action.payload === 'ds') {
+                    return {
+                        ...state,
+                        teamA: {
+                            ...state.teamA,
+                            tieScore: state.teamA.tieScore - 1,
+                        },
+                    };
+                }
+
+                if (action.payload === 'hd') {
+                    return {
+                        ...state,
+                        teamB: {
+                            ...state.teamB,
+                            tieScore: state.teamB.tieScore - 1,
+                        },
+                    };
+                }
+                return state;
+            case DECREASE_GAME_POINT:
+                if (action.payload === 'ds') {
+                    return {
+                        ...state,
+                        teamA: {
+                            ...state.teamA,
+                            gameScore: 0,
+                            gamePoint: state.teamA.gamePoint - 1,
+                        },
+                        teamB: {
+                            ...state.teamB,
+                            gameScore: 0,
+                        },
+                    };
+                }
+
+                if (action.payload === 'hd') {
+                    return {
+                        ...state,
+                        teamA: {
+                            ...state.teamA,
+                            gameScore: 0,
+                        },
+                        teamB: {
+                            ...state.teamB,
+                            gameScore: 0,
+                            gamePoint: state.teamB.gamePoint - 1,
+                        },
+                    };
+                }
+                return state;
             case DECREASE_GAME_SCORE:
+                if (action.payload === 'ds') {
+                    return {
+                        ...state,
+                        teamA: {
+                            ...state.teamA,
+                            gameScore: state.teamA.gameScore - 1,
+                        },
+                    };
+                }
+
+                if (action.payload === 'hd') {
+                    return {
+                        ...state,
+                        teamB: {
+                            ...state.teamB,
+                            gameScore: state.teamB.gameScore - 1,
+                        },
+                    };
+                }
+                return state;
+
                 return state;
             case TOGGLE_MATCH_POINT:
                 return {
