@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "849b7c371bf16d4ec9e28ac75200364e",
+    "revision": "d7e03074cae5770e2c1504b79e23239e",
     "url": "/tns-scoreboard/index.html"
   },
   {
-    "revision": "a37601a4136c86166de3",
+    "revision": "c3adde7d0c1c59cef199",
     "url": "/tns-scoreboard/static/css/2.a43b59a1.chunk.css"
   },
   {
-    "revision": "36dad4701c2be36b3973",
+    "revision": "17a3ec96061704859458",
     "url": "/tns-scoreboard/static/css/main.ef8c15b4.chunk.css"
   },
   {
-    "revision": "a37601a4136c86166de3",
-    "url": "/tns-scoreboard/static/js/2.776aaf40.chunk.js"
+    "revision": "c3adde7d0c1c59cef199",
+    "url": "/tns-scoreboard/static/js/2.a404700b.chunk.js"
   },
   {
     "revision": "3453b8997016469371284a28c0e873e2",
-    "url": "/tns-scoreboard/static/js/2.776aaf40.chunk.js.LICENSE.txt"
+    "url": "/tns-scoreboard/static/js/2.a404700b.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "36dad4701c2be36b3973",
-    "url": "/tns-scoreboard/static/js/main.152f5006.chunk.js"
+    "revision": "17a3ec96061704859458",
+    "url": "/tns-scoreboard/static/js/main.bfc23d04.chunk.js"
   },
   {
     "revision": "fbbed7f2ba405f28c873",
