@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/tns-scoreboard/precache-manifest.c559829b4ca2eae52fd14d43a8e69249.js"
+  "/tns-scoreboard/precache-manifest.e9caa1124aae09dbcf8b9f650544ccb3.js"
 );
 
 self.addEventListener('message', (event) => {
