@@ -10,7 +10,7 @@ ReactDOM.render(
     <React.StrictMode>
         <HashRouter basename="/">
             <GlobalProvider>
-                <App />
+                <h1 style={{ fontSize: '20rem' }}>사과하세요</h1>
             </GlobalProvider>
         </HashRouter>
     </React.StrictMode>,
