@@ -10,12 +10,12 @@ import {
 
 const initialState: InitialStateType = {
     teamA: {
-        members: [],
+        members: ['박종혁', '김진아'],
         gameScore: 0,
         gamePoint: 0,
     },
     teamB: {
-        members: [],
+        members: ['김근태', '최미란'],
         gameScore: 0,
         gamePoint: 0,
     },
