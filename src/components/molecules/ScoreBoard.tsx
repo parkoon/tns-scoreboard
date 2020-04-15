@@ -19,6 +19,8 @@ const StyledScoreBoardContainer = styled.div`
 const boxShadow = `0px 0px 2px rgba(0, 0, 0, 0.2)`;
 
 const StyledPlayerName = styled.span<{ isServeTurn: boolean; themeType: ThemeType }>`
+    display: flex;
+    align-items: center;
     flex: 2;
     position: relative;
     font-size: 20px;
@@ -94,6 +96,7 @@ const StyledGameStatus = styled.div`
     box-sizing: border-box;
     width: 150px;
     text-align: center;
+    border-radius: 7px;
 `;
 
 type ScoreBoardTypes = {
