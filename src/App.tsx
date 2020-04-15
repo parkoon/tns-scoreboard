@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Switch as RouteSwitch, Route } from 'react-router-dom';
 import {
     Drawer,
@@ -19,11 +19,21 @@ import HomePage from './components/pages/HomePage';
 import ScoreBoardPage from './components/pages/ScoreBoardPage';
 import Setting from './components/atoms/Setting';
 import ColorPallet from './components/atoms/ColorPallet';
+import { RadioChangeEvent } from 'antd/lib/radio';
+import { useTheme } from './context/ThemeContext';
 
 function App() {
     const [visible, setVisible] = useState(false);
+
+    const { theme, setTheme } = useTheme()!;
+    console.log(theme);
     const showDrawer = () => {
         setVisible(true);
+    };
+
+    const handleThemeChange = (e: RadioChangeEvent) => {
+        const { value } = e.target;
+        setTheme(value);
     };
     return (
         <>
@@ -44,36 +54,28 @@ function App() {
                 visible={true}
                 width="420"
             >
-                <Form
-                    labelCol={{ span: 4 }}
-                    wrapperCol={{ span: 14 }}
-                    layout="horizontal"
-                    size="small"
-                >
-                    <Form.Item label="테마" name="theme">
-                        <Radio.Group>
-                            <Row>
-                                <Radio.Button style={{ marginRight: '7px' }} value="small">
-                                    클레이
-                                </Radio.Button>
-                                <ColorPallet />
-                            </Row>
+                <Radio.Group onChange={handleThemeChange} defaultValue="clay">
+                    <Row>
+                        <Radio.Button style={{ marginRight: '7px' }} value="clay">
+                            클레이
+                        </Radio.Button>
+                        <ColorPallet />
+                    </Row>
 
-                            <Row>
-                                <Radio.Button style={{ marginRight: '7px' }} value="middle">
-                                    잔디
-                                </Radio.Button>
-                                <ColorPallet />
-                            </Row>
-                            <Row>
-                                <Radio.Button style={{ marginRight: '7px' }} value="large">
-                                    하드
-                                </Radio.Button>
-                                <ColorPallet />
-                            </Row>
-                        </Radio.Group>
-                    </Form.Item>
-                    {/* <Form.Item label="Input">
+                    <Row>
+                        <Radio.Button style={{ marginRight: '7px' }} value="lawn">
+                            잔디
+                        </Radio.Button>
+                        <ColorPallet />
+                    </Row>
+                    <Row>
+                        <Radio.Button style={{ marginRight: '7px' }} value="hard">
+                            하드
+                        </Radio.Button>
+                        <ColorPallet />
+                    </Row>
+                </Radio.Group>
+                {/* <Form.Item label="Input">
                         <Input />
                     </Form.Item>
                     <Form.Item label="Select">
@@ -120,7 +122,6 @@ function App() {
                     <Form.Item label="Button">
                         <Button>Button</Button>
                     </Form.Item> */}
-                </Form>
             </Drawer>
 
             <Setting onClick={showDrawer} />
