@@ -74,6 +74,18 @@ const StyledMatchPointText = styled.p`
     height: 20px;
     color: #c0392b;
 `;
+const StyledGameStatus = styled.div`
+    display: inline-block;
+    background: #2d3436;
+    padding: 7px 12px;
+    color: #fff;
+    font-size: 16px;
+    letter-spacing: 1px;
+    border-top: 5px solid #636e72;
+    border-right: 7px solid #636e72;
+    border-left: 7px solid #636e72;
+`;
+
 type ScoreBoardTypes = {
     isMatchPoint?: boolean;
     onIncreaseScore: (team: Team) => void;
@@ -90,6 +102,7 @@ function ScoreBoard({
 }: ScoreBoardTypes) {
     return (
         <StyledScoreBoardWrapper ref={htmlRef} id="score-board">
+            <StyledGameStatus>TIEBREAK</StyledGameStatus>
             <StyledScoreBoardContainer>
                 <StyledBoardRow>
                     <StyledServeIcon>{teamA.isServeTurn && <ThunderboltFilled />}</StyledServeIcon>
