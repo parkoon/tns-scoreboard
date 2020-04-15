@@ -1,25 +1,23 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Input, Button, Select, Form } from 'antd';
 import { UserOutlined, UserAddOutlined } from '@ant-design/icons';
+import { FormInstance } from 'antd/lib/form';
 
 const { Option } = Select;
 
 function PlayerInputField() {
-    const handleChange = (value: string) => {
-        console.log(`selected ${value}`);
-    };
+    const formRef = useRef<FormInstance>(null);
     const handleFinish = (values: any) => {
         console.log(values);
+
+        if (formRef.current) {
+            formRef.current.resetFields();
+        }
     };
     return (
-        <Form onFinish={handleFinish} style={{ display: 'flex' }}>
+        <Form onFinish={handleFinish} ref={formRef} style={{ display: 'flex' }}>
             <Form.Item name="team" rules={[{ required: true, message: '팀을 선택해 주세요.' }]}>
-                <Select
-                    size="large"
-                    placeholder="팀명"
-                    style={{ width: 200, marginRight: '7px' }}
-                    onChange={handleChange}
-                >
+                <Select size="large" placeholder="팀명" style={{ width: 200, marginRight: '7px' }}>
                     <Option value="hk">행당</Option>
                     <Option value="ds">덕소</Option>
                 </Select>
