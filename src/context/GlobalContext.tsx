@@ -141,7 +141,6 @@ function GlobalProvider({ children }: GlobalProviderType) {
             case SET_MEMBER: {
                 const { team, player } = action.payload;
                 if (team === 'ds') {
-                    console.log('SET_MEMBER__DS');
                     return {
                         ...state,
                         teamA: {
@@ -152,7 +151,6 @@ function GlobalProvider({ children }: GlobalProviderType) {
                 }
 
                 if (team === 'hd') {
-                    console.log('SET_MEMBER__HD');
                     return {
                         ...state,
                         teamB: {
@@ -161,7 +159,6 @@ function GlobalProvider({ children }: GlobalProviderType) {
                         },
                     };
                 }
-                console.log('SET_MEMBER__ERROR');
 
                 return state;
             }

@@ -28,8 +28,8 @@ function HomePage() {
     const history = useHistory();
     const { dispatch, state } = useContext(GlobalContext);
     const { teamA, teamB } = state;
+    console.log(state, `from home page`);
 
-    console.log(state);
     const handleSubmit = (member: Member) => {
         dispatch(setMember(member));
     };

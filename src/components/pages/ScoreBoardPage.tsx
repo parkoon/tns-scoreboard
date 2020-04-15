@@ -40,7 +40,6 @@ function ScoreBoardPage() {
     };
 
     useEffect(() => {
-        console.log(teamA.gameScore + 'vs' + teamB.gameScore);
         if (teamA.gameScore === TENNIS_GAME_POINT.length) {
             dispatch(increaseGamePoint('ds'));
         }

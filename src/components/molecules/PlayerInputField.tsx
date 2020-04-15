@@ -13,7 +13,6 @@ function PlayerInputField({ onSubmit }: PlayerInputField) {
     const formRef = useRef<FormInstance>(null);
 
     const handleFinish = (members: any): void => {
-        console.log(members);
         onSubmit(members);
         if (formRef.current) {
             formRef.current.resetFields();
