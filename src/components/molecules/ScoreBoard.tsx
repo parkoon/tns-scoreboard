@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { ThunderboltFilled } from '@ant-design/icons';
+import { TeamObjectTypes } from '../../context/GlobalContext';
 
 const StyledScoreBoardWrapper = styled.div`
     width: 350px;
@@ -72,26 +73,28 @@ const StyledMatchPointText = styled.p`
 `;
 type ScoreBoardTypes = {
     isMatchPoint?: boolean;
+    teamA: TeamObjectTypes;
+    teamB: TeamObjectTypes;
 };
-function ScoreBoard({ isMatchPoint = false }: ScoreBoardTypes) {
+function ScoreBoard({ isMatchPoint = false, teamA, teamB }: ScoreBoardTypes) {
     return (
         <StyledScoreBoardWrapper>
             <StyledScoreBoardContainer>
                 <StyledBoardRow>
-                    <StyledServeIcon>
-                        <ThunderboltFilled />
-                    </StyledServeIcon>
-                    <StyledPlayerName>김근태 / 박종혁</StyledPlayerName>
-                    <StyledGamePoint>2</StyledGamePoint>
-                    <StyledGameScore>AD</StyledGameScore>
+                    <StyledServeIcon>{teamA.isServeTurn && <ThunderboltFilled />}</StyledServeIcon>
+                    <StyledPlayerName>
+                        {teamA.members[0]} / {teamA.members[1]}
+                    </StyledPlayerName>
+                    <StyledGamePoint>{teamA.gamePoint}</StyledGamePoint>
+                    <StyledGameScore>{teamA.gameScore}</StyledGameScore>
                 </StyledBoardRow>
                 <StyledBoardRow>
-                    <StyledServeIcon>
-                        <ThunderboltFilled />
-                    </StyledServeIcon>
-                    <StyledPlayerName>김근태 / 박종혁</StyledPlayerName>
-                    <StyledGamePoint>2</StyledGamePoint>
-                    <StyledGameScore>AD</StyledGameScore>
+                    <StyledServeIcon>{teamB.isServeTurn && <ThunderboltFilled />}</StyledServeIcon>
+                    <StyledPlayerName>
+                        {teamB.members[0]} / {teamB.members[1]}
+                    </StyledPlayerName>
+                    <StyledGamePoint>{teamB.gamePoint}</StyledGamePoint>
+                    <StyledGameScore>{teamB.gameScore}</StyledGameScore>
                 </StyledBoardRow>
             </StyledScoreBoardContainer>
             <StyledMatchPointText>{isMatchPoint && 'Match Point'}</StyledMatchPointText>

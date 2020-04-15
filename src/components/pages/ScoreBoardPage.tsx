@@ -4,7 +4,10 @@ import ScoreBoard from '../molecules/ScoreBoard';
 import Center from '../atoms/Center';
 import MatchPointSwitch from '../molecules/MatchPointSwitch';
 import { GlobalContext } from '../../context/GlobalContext';
-import { toggleMatchPoint } from '../actions';
+import { toggleMatchPoint, toggleServeTurn } from '../actions';
+import ServeTurnRadio from '../molecules/ServeTurnRadio';
+import { Team } from '../../interface/team';
+import SettingBox from '../molecules/SettingBox';
 
 function ScoreBoardPage() {
     const { state, dispatch } = useContext(GlobalContext);
@@ -12,8 +15,12 @@ function ScoreBoardPage() {
     console.log(state, `from scorebord page`);
     const { teamA, teamB, isMatchPoint } = state;
 
-    const handleChange = (value: boolean) => {
+    const handleMatchChange = (value: boolean) => {
         dispatch(toggleMatchPoint(value));
+    };
+
+    const handleServeChange = (value: Team) => {
+        dispatch(toggleServeTurn(value));
     };
     return (
         <>
@@ -26,8 +33,8 @@ function ScoreBoardPage() {
             />
 
             <Center>
-                <ScoreBoard isMatchPoint={isMatchPoint} />
-                <MatchPointSwitch onChange={handleChange} />
+                <ScoreBoard isMatchPoint={isMatchPoint} teamA={teamA} teamB={teamB} />
+                <SettingBox onServeChange={handleServeChange} onMatchChange={handleMatchChange} />
             </Center>
         </>
     );

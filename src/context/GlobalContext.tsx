@@ -6,35 +6,39 @@ import {
     TOGGLE_MATCH_POINT,
     SET_MEMBER,
     GlobalAction,
+    TOGGLE_SERVE_TURN,
 } from '../components/actions';
 
-const initialState: InitialStateType = {
+const initialState: InitialStateTypes = {
     teamA: {
         members: ['박종혁', '김진아'],
         gameScore: 0,
         gamePoint: 0,
+        isServeTurn: true,
     },
     teamB: {
         members: ['김근태', '최미란'],
         gameScore: 0,
         gamePoint: 0,
+        isServeTurn: false,
     },
     isMatchPoint: false,
 };
 
-type InitialStateType = {
-    teamA: TeamType;
-    teamB: TeamType;
+type InitialStateTypes = {
+    teamA: TeamObjectTypes;
+    teamB: TeamObjectTypes;
     isMatchPoint: boolean;
 };
-type TeamType = {
+export type TeamObjectTypes = {
     members: string[];
     gameScore: number;
     gamePoint: number;
+    isServeTurn: boolean;
 };
 
 export const GlobalContext = createContext<{
-    state: InitialStateType;
+    state: InitialStateTypes;
     dispatch: React.Dispatch<any>;
 }>({ state: initialState, dispatch: () => null });
 
@@ -45,7 +49,7 @@ type GlobalProviderType = {
 };
 
 function GlobalProvider({ children }: GlobalProviderType) {
-    const [state, dispatch] = useReducer((state: InitialStateType, action: GlobalAction) => {
+    const [state, dispatch] = useReducer((state: InitialStateTypes, action: GlobalAction) => {
         switch (action.type) {
             case INCREASE_GAME_SCORE:
                 return state;
@@ -56,6 +60,34 @@ function GlobalProvider({ children }: GlobalProviderType) {
                     ...state,
                     isMatchPoint: action.payload,
                 };
+            case TOGGLE_SERVE_TURN:
+                if (action.payload === 'ds') {
+                    return {
+                        ...state,
+                        teamA: {
+                            ...state.teamA,
+                            isServeTurn: true,
+                        },
+                        teamB: {
+                            ...state.teamB,
+                            isServeTurn: false,
+                        },
+                    };
+                }
+                if (action.payload === 'hd') {
+                    return {
+                        ...state,
+                        teamA: {
+                            ...state.teamA,
+                            isServeTurn: false,
+                        },
+                        teamB: {
+                            ...state.teamB,
+                            isServeTurn: true,
+                        },
+                    };
+                }
+                return state;
             case SET_MEMBER: {
                 const { team, player } = action.payload;
                 if (team === 'ds') {
