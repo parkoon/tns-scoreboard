@@ -16,9 +16,12 @@ import { Team, Score } from '../../interface/team';
 import SettingBox from '../molecules/SettingBox';
 import { TENNIS_GAME_POINT } from '../../constants/game';
 import { downloadImage } from '../../helpers/htmlToImage';
+import MovingArrow from '../atoms/MovingArrow';
+import { useHistory } from 'react-router-dom';
 
 function ScoreBoardPage() {
     const scoreBoardRef = useRef<HTMLDivElement>(null);
+    const history = useHistory();
     const { state, dispatch } = useContext(GlobalContext);
 
     console.log(state, `from scorebord page`);
@@ -39,6 +42,9 @@ function ScoreBoardPage() {
         if (scoreBoardRef.current) {
             downloadImage(scoreBoardRef.current);
         }
+    };
+    const handleArrowClick = () => {
+        history.push('/');
     };
 
     useEffect(() => {
@@ -94,6 +100,8 @@ function ScoreBoardPage() {
                     onImagePrintClick={handleImagePrint}
                 />
             </Center>
+
+            <MovingArrow onClick={handleArrowClick} dir="left" />
         </>
     );
 }
