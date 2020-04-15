@@ -18,14 +18,16 @@ const StyledFieldTitle = styled.h3`
 
 type PlayeFieldType = {
     teamTitle: string;
+    members: string[];
 };
-function PlayerField({ teamTitle }: PlayeFieldType) {
+function PlayerField({ teamTitle, members = [] }: PlayeFieldType) {
     return (
         <StyledPlayerFieldWrapper>
             <StyledFieldTitle>{teamTitle}</StyledFieldTitle>
             <StyledPlayerContainer>
-                <Player />
-                <Player />
+                {members.map((member, idx) => (
+                    <Player key={idx} name={member} />
+                ))}
             </StyledPlayerContainer>
         </StyledPlayerFieldWrapper>
     );

@@ -34,9 +34,11 @@ const StyledPlayerWrapper = styled.div`
     /* background-color: tomato; */
     /* color: #fff; */
 `;
-
-function Player() {
-    return <StyledPlayerWrapper>Parkoon</StyledPlayerWrapper>;
+type PlayerTypes = {
+    name: string;
+};
+function Player({ name }: PlayerTypes) {
+    return <StyledPlayerWrapper>{name}</StyledPlayerWrapper>;
 }
 
 export default Player;

@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
 import { PageHeader } from 'antd';
+import { useHistory } from 'react-router-dom';
+
 import PlayerInputField from '../molecules/PlayerInputField';
 import styled from 'styled-components';
 import PlayerField from '../molecules/PlayerField';
@@ -7,6 +9,7 @@ import Center from '../atoms/Center';
 import { GlobalContext } from '../../context/GlobalContext';
 import { setMember } from '../actions';
 import { Member } from '../../interface/team';
+import MovingArrow from '../atoms/MovingArrow';
 
 const StyledPlayerFieldWrapper = styled.div`
     display: flex;
@@ -22,10 +25,17 @@ const StyledInputFieldWrapper = styled.div`
 `;
 
 function HomePage() {
-    const { dispatch } = useContext(GlobalContext);
+    const history = useHistory();
+    const { dispatch, state } = useContext(GlobalContext);
+    const { teamA, teamB } = state;
 
+    console.log(state);
     const handleSubmit = (member: Member) => {
         dispatch(setMember(member));
+    };
+
+    const handleArrowClick = () => {
+        history.push('/board');
     };
 
     return (
@@ -40,14 +50,16 @@ function HomePage() {
 
             <Center>
                 <StyledPlayerFieldWrapper>
-                    <PlayerField teamTitle="팀 덕소" />
+                    <PlayerField members={teamA.members} teamTitle="팀 덕소" />
                     대
-                    <PlayerField teamTitle="팀 행당" />
+                    <PlayerField members={teamB.members} teamTitle="팀 행당" />
                 </StyledPlayerFieldWrapper>
                 <StyledInputFieldWrapper>
                     <PlayerInputField onSubmit={handleSubmit} />
                 </StyledInputFieldWrapper>
             </Center>
+
+            <MovingArrow onClick={handleArrowClick} />
         </>
     );
 }
