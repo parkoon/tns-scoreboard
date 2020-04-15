@@ -15,9 +15,12 @@ import {
 import { Team, Score } from '../../interface/team';
 import SettingBox from '../molecules/SettingBox';
 import { TENNIS_GAME_POINT } from '../../constants/game';
-import { downloadImage } from '../../helpers/htmlToImage';
+import { downloadImage, downloadImageToJPEG, appendImage } from '../../helpers/htmlToImage';
 import MovingArrow from '../atoms/MovingArrow';
 import { useHistory } from 'react-router-dom';
+
+import '../../helpers/htmlToCanvas';
+import { htmlToCanvas } from '../../helpers/htmlToCanvas';
 
 function ScoreBoardPage() {
     const scoreBoardRef = useRef<HTMLDivElement>(null);
@@ -40,7 +43,10 @@ function ScoreBoardPage() {
 
     const handleImagePrint = () => {
         if (scoreBoardRef.current) {
+            // htmlToCanvas(scoreBoardRef.current);
             downloadImage(scoreBoardRef.current);
+            // downloadImageToJPEG(scoreBoardRef.current);
+            // appendImage(scoreBoardRef.current);
         }
     };
     const handleArrowClick = () => {
