@@ -8,22 +8,26 @@ const StyledColorPallet = styled.div`
     margin-bottom: 12px;
 `;
 
-const StyledLeftColor = styled.div`
+const StyledLeftColor = styled.div<{ color: string }>`
     width: 50%;
     height: 100%;
-    background: blue;
+    background: ${(props) => props.color};
 `;
-const StyledRightColor = styled.div`
+const StyledRightColor = styled.div<{ color: string }>`
     width: 50%;
     height: 100%;
-    background: red;
+    background: ${(props) => props.color};
 `;
 
-function ColorPallet() {
+type ColorPallet = {
+    primary: string;
+    secondary: string;
+};
+function ColorPallet({ primary, secondary }: ColorPallet) {
     return (
         <StyledColorPallet>
-            <StyledLeftColor />
-            <StyledRightColor />
+            <StyledLeftColor color={primary} />
+            <StyledRightColor color={secondary} />
         </StyledColorPallet>
     );
 }

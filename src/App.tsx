@@ -21,6 +21,7 @@ import Setting from './components/atoms/Setting';
 import ColorPallet from './components/atoms/ColorPallet';
 import { RadioChangeEvent } from 'antd/lib/radio';
 import { useTheme } from './context/ThemeContext';
+import { THEME_COLOR } from './constants/theme';
 
 function App() {
     const [visible, setVisible] = useState(false);
@@ -59,20 +60,29 @@ function App() {
                         <Radio.Button style={{ marginRight: '7px' }} value="clay">
                             클레이
                         </Radio.Button>
-                        <ColorPallet />
+                        <ColorPallet
+                            primary={THEME_COLOR['clay'].primary}
+                            secondary={THEME_COLOR['clay'].secondary}
+                        />
                     </Row>
 
                     <Row>
                         <Radio.Button style={{ marginRight: '7px' }} value="lawn">
                             잔디
                         </Radio.Button>
-                        <ColorPallet />
+                        <ColorPallet
+                            primary={THEME_COLOR['lawn'].primary}
+                            secondary={THEME_COLOR['lawn'].secondary}
+                        />
                     </Row>
                     <Row>
                         <Radio.Button style={{ marginRight: '7px' }} value="hard">
                             하드
                         </Radio.Button>
-                        <ColorPallet />
+                        <ColorPallet
+                            primary={THEME_COLOR['hard'].primary}
+                            secondary={THEME_COLOR['hard'].secondary}
+                        />
                     </Row>
                 </Radio.Group>
                 {/* <Form.Item label="Input">
