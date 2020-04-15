@@ -13,6 +13,7 @@ import {
 import ServeTurnRadio from '../molecules/ServeTurnRadio';
 import { Team } from '../../interface/team';
 import SettingBox from '../molecules/SettingBox';
+import { TENNIS_GAME_POINT } from '../../constants/game';
 
 function ScoreBoardPage() {
     const { state, dispatch } = useContext(GlobalContext);
@@ -33,10 +34,10 @@ function ScoreBoardPage() {
 
     useEffect(() => {
         console.log(teamA.gameScore + 'vs' + teamB.gameScore);
-        if (teamA.gameScore === 3) {
+        if (teamA.gameScore === TENNIS_GAME_POINT.length) {
             dispatch(increaseGamePoint('ds'));
         }
-        if (teamB.gameScore === 3) {
+        if (teamB.gameScore === TENNIS_GAME_POINT.length) {
             dispatch(increaseGamePoint('hd'));
         }
     }, [teamA.gameScore, teamB.gameScore, dispatch]);
