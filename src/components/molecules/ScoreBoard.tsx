@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Ref } from 'react';
 import styled from 'styled-components';
 import { ThunderboltFilled } from '@ant-design/icons';
 import { TeamObjectTypes } from '../../context/GlobalContext';
@@ -79,10 +79,17 @@ type ScoreBoardTypes = {
     onIncreaseScore: (team: Team) => void;
     teamA: TeamObjectTypes;
     teamB: TeamObjectTypes;
+    htmlRef: Ref<HTMLDivElement>;
 };
-function ScoreBoard({ onIncreaseScore, isMatchPoint = false, teamA, teamB }: ScoreBoardTypes) {
+function ScoreBoard({
+    onIncreaseScore,
+    isMatchPoint = false,
+    teamA,
+    teamB,
+    htmlRef,
+}: ScoreBoardTypes) {
     return (
-        <StyledScoreBoardWrapper>
+        <StyledScoreBoardWrapper ref={htmlRef} id="score-board">
             <StyledScoreBoardContainer>
                 <StyledBoardRow>
                     <StyledServeIcon>{teamA.isServeTurn && <ThunderboltFilled />}</StyledServeIcon>

@@ -1,8 +1,7 @@
-import React, { useContext, useEffect } from 'react';
-import { PageHeader } from 'antd';
+import React, { useContext, useEffect, useRef } from 'react';
+import { PageHeader, Button } from 'antd';
 import ScoreBoard from '../molecules/ScoreBoard';
 import Center from '../atoms/Center';
-import MatchPointSwitch from '../molecules/MatchPointSwitch';
 import { GlobalContext } from '../../context/GlobalContext';
 import {
     toggleMatchPoint,
@@ -10,12 +9,13 @@ import {
     increaseGameScore,
     increaseGamePoint,
 } from '../actions';
-import ServeTurnRadio from '../molecules/ServeTurnRadio';
 import { Team } from '../../interface/team';
 import SettingBox from '../molecules/SettingBox';
 import { TENNIS_GAME_POINT } from '../../constants/game';
+import { downloadImage } from '../../helpers/htmlToImage';
 
 function ScoreBoardPage() {
+    const scoreBoardRef = useRef<HTMLDivElement>(null);
     const { state, dispatch } = useContext(GlobalContext);
 
     console.log(state, `from scorebord page`);
@@ -30,6 +30,13 @@ function ScoreBoardPage() {
     };
     const handleIncreaseScore = (team: Team) => {
         dispatch(increaseGameScore(team));
+    };
+
+    const handleImagePrint = () => {
+        // 왜 null..?
+        if (scoreBoardRef.current) {
+            downloadImage(scoreBoardRef.current);
+        }
     };
 
     useEffect(() => {
@@ -57,8 +64,13 @@ function ScoreBoardPage() {
                     isMatchPoint={isMatchPoint}
                     teamA={teamA}
                     teamB={teamB}
+                    htmlRef={scoreBoardRef}
                 />
-                <SettingBox onServeChange={handleServeChange} onMatchChange={handleMatchChange} />
+                <SettingBox
+                    onServeChange={handleServeChange}
+                    onMatchChange={handleMatchChange}
+                    onImagePrintClick={handleImagePrint}
+                />
             </Center>
         </>
     );
