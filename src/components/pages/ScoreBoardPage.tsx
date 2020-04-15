@@ -10,6 +10,7 @@ import {
     increaseGamePoint,
     toggleTiebreak,
     increaseTieScore,
+    toggleDuce,
 } from '../actions';
 import { Team, Score } from '../../interface/team';
 import SettingBox from '../molecules/SettingBox';
@@ -21,7 +22,7 @@ function ScoreBoardPage() {
     const { state, dispatch } = useContext(GlobalContext);
 
     console.log(state, `from scorebord page`);
-    const { teamA, teamB, isMatchPoint, isTieBreak } = state;
+    const { teamA, teamB, isMatchPoint, isTieBreak, isDuce } = state;
 
     const handleMatchChange = (value: boolean) => {
         dispatch(toggleMatchPoint(value));
@@ -31,13 +32,10 @@ function ScoreBoardPage() {
         dispatch(toggleServeTurn(team));
     };
     const handleIncreaseScore = (type: Score, team: Team) => {
-        if (isMatchPoint) {
-        }
         type === 'normal' ? dispatch(increaseGameScore(team)) : dispatch(increaseTieScore(team));
     };
 
     const handleImagePrint = () => {
-        // 왜 null..?
         if (scoreBoardRef.current) {
             downloadImage(scoreBoardRef.current);
         }
@@ -63,10 +61,11 @@ function ScoreBoardPage() {
         // 매치 포인트
         if (teamA.tieScore >= 6 || teamB.tieScore >= 6) {
             dispatch(toggleMatchPoint(true));
+            dispatch(toggleDuce(false));
         }
         // 듀스 & 매치 포인트 해제
         if (teamA.tieScore === teamB.tieScore && teamA.tieScore >= 6 && teamB.tieScore >= 6) {
-            alert('듀스');
+            dispatch(toggleDuce(true));
             dispatch(toggleMatchPoint(false));
         }
     }, [teamA.tieScore, teamB.tieScore, dispatch]);

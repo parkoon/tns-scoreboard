@@ -9,6 +9,7 @@ import {
     INCREASE_GAME_POINT,
     TOGGLE_TIEBREAK,
     INCREASE_TIE_SCORE,
+    TOGGLE_DUCE,
 } from '../components/actions';
 
 const initialState: InitialStateTypes = {
@@ -28,6 +29,7 @@ const initialState: InitialStateTypes = {
     },
     isTieBreak: false,
     isMatchPoint: false,
+    isDuce: false,
 };
 
 type InitialStateTypes = {
@@ -35,6 +37,7 @@ type InitialStateTypes = {
     teamB: TeamObjectTypes;
     isMatchPoint: boolean;
     isTieBreak: boolean;
+    isDuce: boolean;
 };
 export type TeamObjectTypes = {
     members: string[];
@@ -142,6 +145,11 @@ function GlobalProvider({ children }: GlobalProviderType) {
                 return {
                     ...state,
                     isTieBreak: action.payload,
+                };
+            case TOGGLE_DUCE:
+                return {
+                    ...state,
+                    isDuce: action.payload,
                 };
             case TOGGLE_SERVE_TURN:
                 if (action.payload === 'ds') {
