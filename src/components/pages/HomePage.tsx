@@ -40,13 +40,13 @@ function HomePage() {
 
     return (
         <>
-            <PageHeader
+            {/* <PageHeader
                 style={{ boxShadow: '0px 1px 3px rgba(0,0,0,0.2)' }}
                 ghost={false}
                 onBack={() => null}
                 title="Title"
                 subTitle="This is a subtitle"
-            />
+            /> */}
 
             <Center>
                 <StyledPlayerFieldWrapper>
