@@ -1,4 +1,4 @@
-import React, { createContext, useReducer } from 'react';
+import React, { createContext, useReducer, useEffect } from 'react';
 import {
     INCREASE_GAME_SCORE,
     DECREASE_GAME_SCORE,
@@ -13,6 +13,8 @@ import {
     DECREASE_GAME_POINT,
     DECREASE_TIE_SCORE,
 } from '../components/actions';
+
+import RedoUndo from '../helpers/redoUndo';
 
 const initialState: InitialStateTypes = {
     teamA: {
@@ -59,6 +61,8 @@ const { Provider } = GlobalContext;
 type GlobalProviderType = {
     children: React.ReactNode;
 };
+
+let redoUndo: RedoUndo;
 
 function GlobalProvider({ children }: GlobalProviderType) {
     const [state, dispatch] = useReducer((state: InitialStateTypes, action: GlobalAction) => {
@@ -283,6 +287,17 @@ function GlobalProvider({ children }: GlobalProviderType) {
                 return state;
         }
     }, initialState);
+
+    useEffect(() => {
+        redoUndo = new RedoUndo();
+    }, []);
+
+    useEffect(() => {
+        // console.log(eval('(' + serialize(state) + ')'));
+        // console.log('=========');
+        // take(state);
+        redoUndo.take(state);
+    }, [state]);
 
     return <Provider value={{ state, dispatch }}>{children}</Provider>;
 }
