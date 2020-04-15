@@ -7,6 +7,7 @@ import {
     SET_MEMBER,
     GlobalAction,
     TOGGLE_SERVE_TURN,
+    INCREASE_GAME_POINT,
 } from '../components/actions';
 
 const initialState: InitialStateTypes = {
@@ -52,6 +53,48 @@ function GlobalProvider({ children }: GlobalProviderType) {
     const [state, dispatch] = useReducer((state: InitialStateTypes, action: GlobalAction) => {
         switch (action.type) {
             case INCREASE_GAME_SCORE:
+                if (action.payload === 'ds') {
+                    return {
+                        ...state,
+                        teamA: {
+                            ...state.teamA,
+                            gameScore: state.teamA.gameScore + 1,
+                        },
+                    };
+                }
+
+                if (action.payload === 'hd') {
+                    return {
+                        ...state,
+                        teamB: {
+                            ...state.teamB,
+                            gameScore: state.teamB.gameScore + 1,
+                        },
+                    };
+                }
+                return state;
+            case INCREASE_GAME_POINT:
+                if (action.payload === 'ds') {
+                    return {
+                        ...state,
+                        teamA: {
+                            ...state.teamA,
+                            gameScore: 0,
+                            gamePoint: state.teamA.gamePoint + 1,
+                        },
+                    };
+                }
+
+                if (action.payload === 'hd') {
+                    return {
+                        ...state,
+                        teamB: {
+                            ...state.teamB,
+                            gameScore: 0,
+                            gamePoint: state.teamB.gamePoint + 1,
+                        },
+                    };
+                }
                 return state;
             case DECREASE_GAME_SCORE:
                 return state;

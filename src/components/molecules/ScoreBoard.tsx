@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { ThunderboltFilled } from '@ant-design/icons';
 import { TeamObjectTypes } from '../../context/GlobalContext';
+import { Team } from '../../interface/team';
 
 const StyledScoreBoardWrapper = styled.div`
     width: 350px;
@@ -73,10 +74,11 @@ const StyledMatchPointText = styled.p`
 `;
 type ScoreBoardTypes = {
     isMatchPoint?: boolean;
+    onIncreaseScore: (team: Team) => void;
     teamA: TeamObjectTypes;
     teamB: TeamObjectTypes;
 };
-function ScoreBoard({ isMatchPoint = false, teamA, teamB }: ScoreBoardTypes) {
+function ScoreBoard({ onIncreaseScore, isMatchPoint = false, teamA, teamB }: ScoreBoardTypes) {
     return (
         <StyledScoreBoardWrapper>
             <StyledScoreBoardContainer>
@@ -86,7 +88,9 @@ function ScoreBoard({ isMatchPoint = false, teamA, teamB }: ScoreBoardTypes) {
                         {teamA.members[0]} / {teamA.members[1]}
                     </StyledPlayerName>
                     <StyledGamePoint>{teamA.gamePoint}</StyledGamePoint>
-                    <StyledGameScore>{teamA.gameScore}</StyledGameScore>
+                    <StyledGameScore onClick={() => onIncreaseScore('ds')}>
+                        {teamA.gameScore}
+                    </StyledGameScore>
                 </StyledBoardRow>
                 <StyledBoardRow>
                     <StyledServeIcon>{teamB.isServeTurn && <ThunderboltFilled />}</StyledServeIcon>
@@ -94,7 +98,9 @@ function ScoreBoard({ isMatchPoint = false, teamA, teamB }: ScoreBoardTypes) {
                         {teamB.members[0]} / {teamB.members[1]}
                     </StyledPlayerName>
                     <StyledGamePoint>{teamB.gamePoint}</StyledGamePoint>
-                    <StyledGameScore>{teamB.gameScore}</StyledGameScore>
+                    <StyledGameScore onClick={() => onIncreaseScore('hd')}>
+                        {teamB.gameScore}
+                    </StyledGameScore>
                 </StyledBoardRow>
             </StyledScoreBoardContainer>
             <StyledMatchPointText>{isMatchPoint && 'Match Point'}</StyledMatchPointText>

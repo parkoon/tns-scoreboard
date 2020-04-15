@@ -1,10 +1,15 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { PageHeader } from 'antd';
 import ScoreBoard from '../molecules/ScoreBoard';
 import Center from '../atoms/Center';
 import MatchPointSwitch from '../molecules/MatchPointSwitch';
 import { GlobalContext } from '../../context/GlobalContext';
-import { toggleMatchPoint, toggleServeTurn } from '../actions';
+import {
+    toggleMatchPoint,
+    toggleServeTurn,
+    increaseGameScore,
+    increaseGamePoint,
+} from '../actions';
 import ServeTurnRadio from '../molecules/ServeTurnRadio';
 import { Team } from '../../interface/team';
 import SettingBox from '../molecules/SettingBox';
@@ -19,9 +24,22 @@ function ScoreBoardPage() {
         dispatch(toggleMatchPoint(value));
     };
 
-    const handleServeChange = (value: Team) => {
-        dispatch(toggleServeTurn(value));
+    const handleServeChange = (team: Team) => {
+        dispatch(toggleServeTurn(team));
     };
+    const handleIncreaseScore = (team: Team) => {
+        dispatch(increaseGameScore(team));
+    };
+
+    useEffect(() => {
+        console.log(teamA.gameScore + 'vs' + teamB.gameScore);
+        if (teamA.gameScore === 3) {
+            dispatch(increaseGamePoint('ds'));
+        }
+        if (teamB.gameScore === 3) {
+            dispatch(increaseGamePoint('hd'));
+        }
+    }, [teamA.gameScore, teamB.gameScore, dispatch]);
     return (
         <>
             <PageHeader
@@ -33,7 +51,12 @@ function ScoreBoardPage() {
             />
 
             <Center>
-                <ScoreBoard isMatchPoint={isMatchPoint} teamA={teamA} teamB={teamB} />
+                <ScoreBoard
+                    onIncreaseScore={handleIncreaseScore}
+                    isMatchPoint={isMatchPoint}
+                    teamA={teamA}
+                    teamB={teamB}
+                />
                 <SettingBox onServeChange={handleServeChange} onMatchChange={handleMatchChange} />
             </Center>
         </>
