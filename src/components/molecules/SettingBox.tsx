@@ -1,5 +1,5 @@
 import React from 'react';
-import { SearchOutlined } from '@ant-design/icons';
+import { FileJpgOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 
 import MatchPointSwitch from './MatchPointSwitch';
@@ -24,7 +24,7 @@ function SettingBox({ onMatchChange, onServeChange, onImagePrintClick }: Setting
             <ServeTurnRadio onChange={onServeChange} />
             <Spacing />
             <Spacing />
-            <Button size="large" block icon={<SearchOutlined />} onClick={onImagePrintClick}>
+            <Button size="large" block icon={<FileJpgOutlined />} onClick={onImagePrintClick}>
                 이미지로 출력하기
             </Button>
         </StyledSettingBoxWrapper>
