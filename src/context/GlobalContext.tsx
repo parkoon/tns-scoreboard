@@ -52,7 +52,10 @@ function GlobalProvider({ children }: GlobalProviderType) {
             case DECREASE_GAME_SCORE:
                 return state;
             case TOGGLE_MATCH_POINT:
-                return state;
+                return {
+                    ...state,
+                    isMatchPoint: action.payload,
+                };
             case SET_MEMBER: {
                 const { team, player } = action.payload;
                 if (team === 'ds') {

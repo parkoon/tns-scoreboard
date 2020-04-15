@@ -10,14 +10,14 @@ const SwitchTitle = styled.span`
     margin-right: 7px;
 `;
 
-function MatchPointSwitch() {
-    const onChange = (checked: boolean) => {
-        console.log(`switch to ${checked}`);
-    };
+type MatchPointSwitchTypes = {
+    onChange: (value: boolean) => void;
+};
+function MatchPointSwitch({ onChange }: MatchPointSwitchTypes) {
     return (
         <StyledSwitchWrapper>
             <SwitchTitle>매치 포인트</SwitchTitle>
-            <Switch defaultChecked onChange={onChange} />
+            <Switch onChange={onChange} />
         </StyledSwitchWrapper>
     );
 }

@@ -67,9 +67,13 @@ const StyledMatchPointText = styled.p`
     font-style: italic;
     margin-right: 7px;
     letter-spacing: 1px;
+    height: 20px;
     color: #c0392b;
 `;
-function ScoreBoard() {
+type ScoreBoardTypes = {
+    isMatchPoint?: boolean;
+};
+function ScoreBoard({ isMatchPoint = false }: ScoreBoardTypes) {
     return (
         <StyledScoreBoardWrapper>
             <StyledScoreBoardContainer>
@@ -90,7 +94,7 @@ function ScoreBoard() {
                     <StyledGameScore>AD</StyledGameScore>
                 </StyledBoardRow>
             </StyledScoreBoardContainer>
-            <StyledMatchPointText>Match Point</StyledMatchPointText>
+            <StyledMatchPointText>{isMatchPoint && 'Match Point'}</StyledMatchPointText>
         </StyledScoreBoardWrapper>
     );
 }

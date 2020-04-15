@@ -1,10 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { PageHeader } from 'antd';
 import ScoreBoard from '../molecules/ScoreBoard';
 import Center from '../atoms/Center';
 import MatchPointSwitch from '../molecules/MatchPointSwitch';
+import { GlobalContext } from '../../context/GlobalContext';
+import { toggleMatchPoint } from '../actions';
 
 function ScoreBoardPage() {
+    const { state, dispatch } = useContext(GlobalContext);
+
+    console.log(state, `from scorebord page`);
+    const { teamA, teamB, isMatchPoint } = state;
+
+    const handleChange = (value: boolean) => {
+        dispatch(toggleMatchPoint(value));
+    };
     return (
         <>
             <PageHeader
@@ -16,8 +26,8 @@ function ScoreBoardPage() {
             />
 
             <Center>
-                <ScoreBoard />
-                <MatchPointSwitch />
+                <ScoreBoard isMatchPoint={isMatchPoint} />
+                <MatchPointSwitch onChange={handleChange} />
             </Center>
         </>
     );
