@@ -86,11 +86,14 @@ const StyledBoardRow = styled.div`
 const StyledGameStatus = styled.div`
     display: inline-block;
     background: #fff;
-    padding: 7px 12px;
+    padding: 5px 0px;
     font-size: 16px;
     letter-spacing: 1px;
     box-shadow: ${boxShadow};
     font-weight: bold;
+    box-sizing: border-box;
+    width: 150px;
+    text-align: center;
 `;
 
 type ScoreBoardTypes = {
