@@ -14,6 +14,7 @@ const StyledScoreBoardContainer = styled.div`
     border: 5px solid #636e72;
     border-right: 7px solid #636e72;
     border-left: 7px solid #636e72;
+    user-select: none;
 `;
 
 const StyledPlayerName = styled.span`
