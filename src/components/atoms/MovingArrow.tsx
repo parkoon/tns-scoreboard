@@ -30,7 +30,7 @@ const StyledArrowWrapper = styled.div<{ dir: 'left' | 'right' }>`
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 9rem;
+    font-size: 5rem;
     opacity: 0.7;
     cursor: pointer;
 
