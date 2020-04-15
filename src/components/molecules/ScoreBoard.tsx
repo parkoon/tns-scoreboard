@@ -27,6 +27,7 @@ const StyledPlayerName = styled.span<{ isServeTurn: boolean }>`
     background: #218c74;
     margin-right: 7px;
     min-width: 240px;
+    min-height: 45px;
     box-shadow: ${boxShadow};
 
     ${(props) =>
