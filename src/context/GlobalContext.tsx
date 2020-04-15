@@ -16,14 +16,14 @@ const initialState: InitialStateTypes = {
     teamA: {
         members: ['박종혁', '김진아'],
         gameScore: 0,
-        gamePoint: 5,
+        gamePoint: 0,
         tieScore: 0,
         isServeTurn: true,
     },
     teamB: {
         members: ['김근태', '최미란'],
         gameScore: 0,
-        gamePoint: 5,
+        gamePoint: 0,
         tieScore: 0,
         isServeTurn: false,
     },
