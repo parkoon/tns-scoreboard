@@ -96,7 +96,6 @@ const StyledGameStatus = styled.div`
     box-sizing: border-box;
     width: 150px;
     text-align: center;
-    border-radius: 7px;
 `;
 
 type ScoreBoardTypes = {
