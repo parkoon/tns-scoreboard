@@ -105,10 +105,10 @@ function ScoreBoard({
 }: ScoreBoardTypes) {
     return (
         <StyledScoreBoardWrapper ref={htmlRef} id="score-board">
-            {isTieBreak ? (
+            {isMatchPoint ? (
+                <StyledGameStatus> MATCH POINT</StyledGameStatus>
+            ) : isTieBreak ? (
                 <StyledGameStatus>TIEBREAK</StyledGameStatus>
-            ) : isMatchPoint ? (
-                <StyledGameStatus>MATCH POINT</StyledGameStatus>
             ) : null}
 
             <StyledScoreBoardContainer>

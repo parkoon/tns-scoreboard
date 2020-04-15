@@ -31,7 +31,8 @@ function ScoreBoardPage() {
         dispatch(toggleServeTurn(team));
     };
     const handleIncreaseScore = (type: Score, team: Team) => {
-        console.log(type, team);
+        if (isMatchPoint) {
+        }
         type === 'normal' ? dispatch(increaseGameScore(team)) : dispatch(increaseTieScore(team));
     };
 
@@ -52,11 +53,23 @@ function ScoreBoardPage() {
     }, [teamA.gameScore, teamB.gameScore, dispatch]);
 
     useEffect(() => {
-        // Tiebreak
+        // 타이 브레이크 시작
         if (teamA.gamePoint === 5 && teamB.gamePoint === 5) {
             dispatch(toggleTiebreak(true));
         }
     }, [teamA.gamePoint, teamB.gamePoint, dispatch]);
+
+    useEffect(() => {
+        // 매치 포인트
+        if (teamA.tieScore >= 6 || teamB.tieScore >= 6) {
+            dispatch(toggleMatchPoint(true));
+        }
+        // 듀스 & 매치 포인트 해제
+        if (teamA.tieScore === teamB.tieScore && teamA.tieScore >= 6 && teamB.tieScore >= 6) {
+            alert('듀스');
+            dispatch(toggleMatchPoint(false));
+        }
+    }, [teamA.tieScore, teamB.tieScore, dispatch]);
     return (
         <>
             <PageHeader
