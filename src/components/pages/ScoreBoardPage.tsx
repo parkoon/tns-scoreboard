@@ -21,11 +21,13 @@ import { useHistory } from 'react-router-dom';
 
 import '../../helpers/htmlToCanvas';
 import { htmlToCanvas } from '../../helpers/htmlToCanvas';
+import { useTheme } from '../../context/ThemeContext';
 
 function ScoreBoardPage() {
     const scoreBoardRef = useRef<HTMLDivElement>(null);
     const history = useHistory();
     const { state, dispatch } = useContext(GlobalContext);
+    const { theme, setTheme } = useTheme()!;
 
     console.log(state, `from scorebord page`);
     const { teamA, teamB, isMatchPoint, isTieBreak, isDuce } = state;
@@ -99,6 +101,7 @@ function ScoreBoardPage() {
                     teamA={teamA}
                     teamB={teamB}
                     htmlRef={scoreBoardRef}
+                    themeType={theme}
                 />
                 <SettingBox
                     onServeChange={handleServeChange}

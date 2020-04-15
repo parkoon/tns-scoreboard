@@ -51,8 +51,8 @@ function App() {
                 placement="right"
                 closable={false}
                 onClose={() => setVisible(false)}
-                visible={true}
-                width="420"
+                visible={visible}
+                width="320"
             >
                 <Radio.Group onChange={handleThemeChange} defaultValue="clay">
                     <Row>

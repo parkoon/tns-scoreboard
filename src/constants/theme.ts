@@ -1,14 +1,14 @@
 export const THEME_COLOR = {
     clay: {
-        primary: 'red',
-        secondary: 'blue',
+        primary: '#000000',
+        secondary: '#f9a410',
     },
     lawn: {
-        primary: 'tomato',
-        secondary: 'grey',
+        primary: '#205e26',
+        secondary: '#e56520',
     },
     hard: {
-        primary: 'yellow',
-        secondary: 'blown',
+        primary: '#501b85',
+        secondary: '#50851b',
     },
 };

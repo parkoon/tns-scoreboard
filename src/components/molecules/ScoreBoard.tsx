@@ -4,6 +4,8 @@ import { ThunderboltFilled } from '@ant-design/icons';
 import { TeamObjectTypes } from '../../context/GlobalContext';
 import { Team, Score } from '../../interface/team';
 import { TENNIS_GAME_POINT } from '../../constants/game';
+import { ThemeType } from '../../interface/theme';
+import { THEME_COLOR } from '../../constants/theme';
 
 const StyledScoreBoardWrapper = styled.div`
     margin-bottom: 24px;
@@ -16,7 +18,7 @@ const StyledScoreBoardContainer = styled.div`
 
 const boxShadow = `0px 0px 2px rgba(0, 0, 0, 0.2)`;
 
-const StyledPlayerName = styled.span<{ isServeTurn: boolean }>`
+const StyledPlayerName = styled.span<{ isServeTurn: boolean; themeType: ThemeType }>`
     flex: 2;
     position: relative;
     font-size: 20px;
@@ -24,7 +26,7 @@ const StyledPlayerName = styled.span<{ isServeTurn: boolean }>`
     letter-spacing: 4px;
     padding: 7px;
     padding-left: 24px;
-    background: #218c74;
+    background: ${(props) => THEME_COLOR[props.themeType].primary};
     margin-right: 7px;
     min-width: 240px;
     min-height: 45px;
@@ -38,23 +40,14 @@ const StyledPlayerName = styled.span<{ isServeTurn: boolean }>`
                 position: absolute;
                 width: 10px;
                 height: 100%;
-                background: #e67e22;
+                background: ${THEME_COLOR[props.themeType].secondary};
                 left: 0;
                 top: 0;
             }
         `}
 `;
-const StyledServeIcon = styled.div`
-    /* flex: 1; */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 30px;
-    color: #fdcb6e;
-    text-align: center;
-    font-size: 18px;
-`;
-const StyledGameScore = styled.span`
+
+const StyledGameScore = styled.span<{ themeType: ThemeType }>`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -66,7 +59,7 @@ const StyledGameScore = styled.span`
     box-shadow: ${boxShadow};
     font-weight: bold;
 
-    color: #e67e22;
+    color: ${(props) => THEME_COLOR[props.themeType].secondary};
     &:hover {
         background: rgba(0, 0, 0, 0.2);
     }
@@ -87,7 +80,6 @@ const StyledBoardRow = styled.div`
     display: flex;
     font-size: 24px;
     &:first-child {
-        /* border-bottom: 3px solid #636e72; */
     }
 `;
 
@@ -99,9 +91,6 @@ const StyledGameStatus = styled.div`
     letter-spacing: 1px;
     box-shadow: ${boxShadow};
     font-weight: bold;
-    /* border-top: 5px solid #636e72; */
-    /* border-right: 7px solid #636e72; */
-    /* border-left: 7px solid #636e72; */
 `;
 
 type ScoreBoardTypes = {
@@ -111,6 +100,7 @@ type ScoreBoardTypes = {
     teamA: TeamObjectTypes;
     teamB: TeamObjectTypes;
     htmlRef: Ref<HTMLDivElement>;
+    themeType?: ThemeType;
 };
 function ScoreBoard({
     onIncreaseScore,
@@ -119,7 +109,9 @@ function ScoreBoard({
     teamA,
     teamB,
     htmlRef,
+    themeType = 'clay',
 }: ScoreBoardTypes) {
+    console.log('themeType', themeType);
     return (
         <StyledScoreBoardWrapper ref={htmlRef} id="score-board">
             {isMatchPoint ? (
@@ -130,31 +122,43 @@ function ScoreBoard({
 
             <StyledScoreBoardContainer>
                 <StyledBoardRow>
-                    <StyledPlayerName isServeTurn={teamA.isServeTurn}>
+                    <StyledPlayerName isServeTurn={teamA.isServeTurn} themeType={themeType}>
                         {teamA.members[0]} / {teamA.members[1]}
                     </StyledPlayerName>
                     <StyledGamePoint>{teamA.gamePoint}</StyledGamePoint>
                     {!isTieBreak ? (
-                        <StyledGameScore onClick={() => onIncreaseScore('normal', 'ds')}>
+                        <StyledGameScore
+                            themeType={themeType}
+                            onClick={() => onIncreaseScore('normal', 'ds')}
+                        >
                             {TENNIS_GAME_POINT[teamA.gameScore]}
                         </StyledGameScore>
                     ) : (
-                        <StyledGameScore onClick={() => onIncreaseScore('tie', 'ds')}>
+                        <StyledGameScore
+                            themeType={themeType}
+                            onClick={() => onIncreaseScore('tie', 'ds')}
+                        >
                             {teamA.tieScore}
                         </StyledGameScore>
                     )}
                 </StyledBoardRow>
                 <StyledBoardRow>
-                    <StyledPlayerName isServeTurn={teamB.isServeTurn}>
+                    <StyledPlayerName themeType={themeType} isServeTurn={teamB.isServeTurn}>
                         {teamB.members[0]} / {teamB.members[1]}
                     </StyledPlayerName>
                     <StyledGamePoint>{teamB.gamePoint}</StyledGamePoint>
                     {!isTieBreak ? (
-                        <StyledGameScore onClick={() => onIncreaseScore('normal', 'hd')}>
+                        <StyledGameScore
+                            themeType={themeType}
+                            onClick={() => onIncreaseScore('normal', 'hd')}
+                        >
                             {TENNIS_GAME_POINT[teamB.gameScore]}
                         </StyledGameScore>
                     ) : (
-                        <StyledGameScore onClick={() => onIncreaseScore('tie', 'hd')}>
+                        <StyledGameScore
+                            themeType={themeType}
+                            onClick={() => onIncreaseScore('tie', 'hd')}
+                        >
                             {teamB.tieScore}
                         </StyledGameScore>
                     )}
