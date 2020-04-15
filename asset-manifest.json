@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/tns-scoreboard/static/css/main.ef8c15b4.chunk.css",
+    "main.js": "/tns-scoreboard/static/js/main.152f5006.chunk.js",
+    "main.js.map": "/tns-scoreboard/static/js/main.152f5006.chunk.js.map",
+    "runtime-main.js": "/tns-scoreboard/static/js/runtime-main.317e3d2e.js",
+    "runtime-main.js.map": "/tns-scoreboard/static/js/runtime-main.317e3d2e.js.map",
+    "static/css/2.a43b59a1.chunk.css": "/tns-scoreboard/static/css/2.a43b59a1.chunk.css",
+    "static/js/2.776aaf40.chunk.js": "/tns-scoreboard/static/js/2.776aaf40.chunk.js",
+    "static/js/2.776aaf40.chunk.js.map": "/tns-scoreboard/static/js/2.776aaf40.chunk.js.map",
+    "index.html": "/tns-scoreboard/index.html",
+    "precache-manifest.315bb33d1eea34375fc04cd41d44e2c9.js": "/tns-scoreboard/precache-manifest.315bb33d1eea34375fc04cd41d44e2c9.js",
+    "service-worker.js": "/tns-scoreboard/service-worker.js",
+    "static/css/2.a43b59a1.chunk.css.map": "/tns-scoreboard/static/css/2.a43b59a1.chunk.css.map",
+    "static/css/main.ef8c15b4.chunk.css.map": "/tns-scoreboard/static/css/main.ef8c15b4.chunk.css.map",
+    "static/js/2.776aaf40.chunk.js.LICENSE.txt": "/tns-scoreboard/static/js/2.776aaf40.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.317e3d2e.js",
+    "static/css/2.a43b59a1.chunk.css",
+    "static/js/2.776aaf40.chunk.js",
+    "static/css/main.ef8c15b4.chunk.css",
+    "static/js/main.152f5006.chunk.js"
+  ]
+}
