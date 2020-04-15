@@ -10,7 +10,9 @@ ReactDOM.render(
     <React.StrictMode>
         <HashRouter basename="/">
             <GlobalProvider>
-                <h1 style={{ fontSize: '20rem' }}>사과하세요</h1>
+                <h1 style={{ fontSize: '20rem' }}>
+                    해당 사이트를 이용할 수 없습니다. 이용하시려면 박종혁님에게 문의 바랍니다.
+                </h1>
             </GlobalProvider>
         </HashRouter>
     </React.StrictMode>,
