@@ -15,10 +15,14 @@ const StyledPlayerContainer = styled.div`
 const StyledFieldTitle = styled.h3`
     margin-left: 12px;
 `;
-function PlayerField() {
+
+type PlayeFieldType = {
+    teamTitle: string;
+};
+function PlayerField({ teamTitle }: PlayeFieldType) {
     return (
         <StyledPlayerFieldWrapper>
-            <StyledFieldTitle>Team Blue</StyledFieldTitle>
+            <StyledFieldTitle>{teamTitle}</StyledFieldTitle>
             <StyledPlayerContainer>
                 <Player />
                 <Player />

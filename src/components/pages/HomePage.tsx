@@ -31,9 +31,9 @@ function HomePage() {
 
             <Center>
                 <StyledPlayerFieldWrapper>
-                    <PlayerField />
-                    vs
-                    <PlayerField />
+                    <PlayerField teamTitle="팀 덕소" />
+                    대
+                    <PlayerField teamTitle="팀 행당" />
                 </StyledPlayerFieldWrapper>
                 <StyledInputFieldWrapper>
                     <PlayerInputField />

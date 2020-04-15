@@ -18,8 +18,8 @@ function PlayerInputField() {
         <Form onFinish={handleFinish} ref={formRef} style={{ display: 'flex' }}>
             <Form.Item name="team" rules={[{ required: true, message: '팀을 선택해 주세요.' }]}>
                 <Select size="large" placeholder="팀명" style={{ width: 200, marginRight: '7px' }}>
-                    <Option value="hk">행당</Option>
                     <Option value="ds">덕소</Option>
+                    <Option value="hk">행당</Option>
                 </Select>
             </Form.Item>
 
