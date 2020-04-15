@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { ThunderboltFilled } from '@ant-design/icons';
 import { TeamObjectTypes } from '../../context/GlobalContext';
 import { Team } from '../../interface/team';
+import { TENNIS_GAME_POINT } from '../../constants/game';
 
 const StyledScoreBoardWrapper = styled.div`
     width: 350px;
@@ -90,7 +91,7 @@ function ScoreBoard({ onIncreaseScore, isMatchPoint = false, teamA, teamB }: Sco
                     </StyledPlayerName>
                     <StyledGamePoint>{teamA.gamePoint}</StyledGamePoint>
                     <StyledGameScore onClick={() => onIncreaseScore('ds')}>
-                        {teamA.gameScore}
+                        {TENNIS_GAME_POINT[teamA.gameScore]}
                     </StyledGameScore>
                 </StyledBoardRow>
                 <StyledBoardRow>
@@ -100,7 +101,7 @@ function ScoreBoard({ onIncreaseScore, isMatchPoint = false, teamA, teamB }: Sco
                     </StyledPlayerName>
                     <StyledGamePoint>{teamB.gamePoint}</StyledGamePoint>
                     <StyledGameScore onClick={() => onIncreaseScore('hd')}>
-                        {teamB.gameScore}
+                        {TENNIS_GAME_POINT[teamB.gameScore]}
                     </StyledGameScore>
                 </StyledBoardRow>
             </StyledScoreBoardContainer>
