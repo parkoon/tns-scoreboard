@@ -7,6 +7,7 @@ import {
     GlobalAction,
     TOGGLE_SERVE_TURN,
     INCREASE_GAME_POINT,
+    TOGGLE_TIEBREAK,
 } from '../components/actions';
 
 const initialState: InitialStateTypes = {
@@ -22,6 +23,7 @@ const initialState: InitialStateTypes = {
         gamePoint: 0,
         isServeTurn: false,
     },
+    isTieBreak: false,
     isMatchPoint: false,
 };
 
@@ -29,6 +31,7 @@ type InitialStateTypes = {
     teamA: TeamObjectTypes;
     teamB: TeamObjectTypes;
     isMatchPoint: boolean;
+    isTieBreak: boolean;
 };
 export type TeamObjectTypes = {
     members: string[];
@@ -109,6 +112,11 @@ function GlobalProvider({ children }: GlobalProviderType) {
                 return {
                     ...state,
                     isMatchPoint: action.payload,
+                };
+            case TOGGLE_TIEBREAK:
+                return {
+                    ...state,
+                    isTieBreak: action.payload,
                 };
             case TOGGLE_SERVE_TURN:
                 if (action.payload === 'ds') {
