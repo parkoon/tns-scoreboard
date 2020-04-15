@@ -6,7 +6,7 @@ import { Team, Score } from '../../interface/team';
 import { TENNIS_GAME_POINT } from '../../constants/game';
 
 const StyledScoreBoardWrapper = styled.div`
-    width: 350px;
+    /* width: 420px; */
     margin-bottom: 24px;
 `;
 const StyledScoreBoardContainer = styled.div`
