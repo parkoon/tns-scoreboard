@@ -1,29 +1,47 @@
 import React, { Ref } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { ThunderboltFilled } from '@ant-design/icons';
 import { TeamObjectTypes } from '../../context/GlobalContext';
 import { Team, Score } from '../../interface/team';
 import { TENNIS_GAME_POINT } from '../../constants/game';
 
 const StyledScoreBoardWrapper = styled.div`
-    /* width: 420px; */
     margin-bottom: 24px;
 `;
 const StyledScoreBoardContainer = styled.div`
     width: 100%;
     height: 100%;
-    background-color: #2d3436;
-    border: 5px solid #636e72;
-    border-right: 7px solid #636e72;
-    border-left: 7px solid #636e72;
     user-select: none;
 `;
 
-const StyledPlayerName = styled.span`
+const boxShadow = `0px 0px 2px rgba(0, 0, 0, 0.2)`;
+
+const StyledPlayerName = styled.span<{ isServeTurn: boolean }>`
     flex: 2;
+    position: relative;
+    font-size: 20px;
     color: #fff;
     letter-spacing: 4px;
     padding: 7px;
+    padding-left: 24px;
+    background: #218c74;
+    margin-right: 7px;
+    min-width: 240px;
+    box-shadow: ${boxShadow};
+
+    ${(props) =>
+        props.isServeTurn &&
+        css`
+            &::before {
+                content: '';
+                position: absolute;
+                width: 10px;
+                height: 100%;
+                background: #e67e22;
+                left: 0;
+                top: 0;
+            }
+        `}
 `;
 const StyledServeIcon = styled.div`
     /* flex: 1; */
@@ -44,47 +62,45 @@ const StyledGameScore = styled.span`
     background: #fff;
     cursor: pointer;
     transition: 0.3s;
+    box-shadow: ${boxShadow};
+    font-weight: bold;
+
+    color: #e67e22;
     &:hover {
-        color: #e67e22;
+        background: rgba(0, 0, 0, 0.2);
     }
 `;
 const StyledGamePoint = styled.span`
     width: 50px;
-    color: #fff;
+    background: #fff;
+    margin-right: 7px;
     text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
+    box-shadow: ${boxShadow};
+    font-weight: bold;
 `;
 
 const StyledBoardRow = styled.div`
     display: flex;
     font-size: 24px;
     &:first-child {
-        border-bottom: 3px solid #636e72;
+        /* border-bottom: 3px solid #636e72; */
     }
 `;
 
-const StyledMatchPointText = styled.p`
-    text-align: right;
-    font-size: 17px;
-    text-transform: uppercase;
-    font-style: italic;
-    margin-right: 7px;
-    letter-spacing: 1px;
-    height: 20px;
-    color: #c0392b;
-`;
 const StyledGameStatus = styled.div`
     display: inline-block;
-    background: #2d3436;
+    background: #fff;
     padding: 7px 12px;
-    color: #fff;
     font-size: 16px;
     letter-spacing: 1px;
-    border-top: 5px solid #636e72;
-    border-right: 7px solid #636e72;
-    border-left: 7px solid #636e72;
+    box-shadow: ${boxShadow};
+    font-weight: bold;
+    /* border-top: 5px solid #636e72; */
+    /* border-right: 7px solid #636e72; */
+    /* border-left: 7px solid #636e72; */
 `;
 
 type ScoreBoardTypes = {
@@ -113,8 +129,7 @@ function ScoreBoard({
 
             <StyledScoreBoardContainer>
                 <StyledBoardRow>
-                    <StyledServeIcon>{teamA.isServeTurn && <ThunderboltFilled />}</StyledServeIcon>
-                    <StyledPlayerName>
+                    <StyledPlayerName isServeTurn={teamA.isServeTurn}>
                         {teamA.members[0]} / {teamA.members[1]}
                     </StyledPlayerName>
                     <StyledGamePoint>{teamA.gamePoint}</StyledGamePoint>
@@ -129,8 +144,7 @@ function ScoreBoard({
                     )}
                 </StyledBoardRow>
                 <StyledBoardRow>
-                    <StyledServeIcon>{teamB.isServeTurn && <ThunderboltFilled />}</StyledServeIcon>
-                    <StyledPlayerName>
+                    <StyledPlayerName isServeTurn={teamB.isServeTurn}>
                         {teamB.members[0]} / {teamB.members[1]}
                     </StyledPlayerName>
                     <StyledGamePoint>{teamB.gamePoint}</StyledGamePoint>
