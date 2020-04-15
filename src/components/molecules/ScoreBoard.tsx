@@ -2,11 +2,12 @@ import React, { Ref } from 'react';
 import styled from 'styled-components';
 import { ThunderboltFilled } from '@ant-design/icons';
 import { TeamObjectTypes } from '../../context/GlobalContext';
-import { Team } from '../../interface/team';
+import { Team, Score } from '../../interface/team';
 import { TENNIS_GAME_POINT } from '../../constants/game';
 
 const StyledScoreBoardWrapper = styled.div`
     width: 350px;
+    margin-bottom: 24px;
 `;
 const StyledScoreBoardContainer = styled.div`
     width: 100%;
@@ -88,7 +89,8 @@ const StyledGameStatus = styled.div`
 
 type ScoreBoardTypes = {
     isMatchPoint?: boolean;
-    onIncreaseScore: (team: Team) => void;
+    isTieBreak?: boolean;
+    onIncreaseScore: (type: Score, team: Team) => void;
     teamA: TeamObjectTypes;
     teamB: TeamObjectTypes;
     htmlRef: Ref<HTMLDivElement>;
@@ -96,13 +98,19 @@ type ScoreBoardTypes = {
 function ScoreBoard({
     onIncreaseScore,
     isMatchPoint = false,
+    isTieBreak = false,
     teamA,
     teamB,
     htmlRef,
 }: ScoreBoardTypes) {
     return (
         <StyledScoreBoardWrapper ref={htmlRef} id="score-board">
-            <StyledGameStatus>TIEBREAK</StyledGameStatus>
+            {isTieBreak ? (
+                <StyledGameStatus>TIEBREAK</StyledGameStatus>
+            ) : isMatchPoint ? (
+                <StyledGameStatus>MATCH POINT</StyledGameStatus>
+            ) : null}
+
             <StyledScoreBoardContainer>
                 <StyledBoardRow>
                     <StyledServeIcon>{teamA.isServeTurn && <ThunderboltFilled />}</StyledServeIcon>
@@ -110,9 +118,15 @@ function ScoreBoard({
                         {teamA.members[0]} / {teamA.members[1]}
                     </StyledPlayerName>
                     <StyledGamePoint>{teamA.gamePoint}</StyledGamePoint>
-                    <StyledGameScore onClick={() => onIncreaseScore('ds')}>
-                        {TENNIS_GAME_POINT[teamA.gameScore]}
-                    </StyledGameScore>
+                    {!isTieBreak ? (
+                        <StyledGameScore onClick={() => onIncreaseScore('normal', 'ds')}>
+                            {TENNIS_GAME_POINT[teamA.gameScore]}
+                        </StyledGameScore>
+                    ) : (
+                        <StyledGameScore onClick={() => onIncreaseScore('tie', 'ds')}>
+                            {teamA.tieScore}
+                        </StyledGameScore>
+                    )}
                 </StyledBoardRow>
                 <StyledBoardRow>
                     <StyledServeIcon>{teamB.isServeTurn && <ThunderboltFilled />}</StyledServeIcon>
@@ -120,12 +134,17 @@ function ScoreBoard({
                         {teamB.members[0]} / {teamB.members[1]}
                     </StyledPlayerName>
                     <StyledGamePoint>{teamB.gamePoint}</StyledGamePoint>
-                    <StyledGameScore onClick={() => onIncreaseScore('hd')}>
-                        {TENNIS_GAME_POINT[teamB.gameScore]}
-                    </StyledGameScore>
+                    {!isTieBreak ? (
+                        <StyledGameScore onClick={() => onIncreaseScore('normal', 'hd')}>
+                            {TENNIS_GAME_POINT[teamB.gameScore]}
+                        </StyledGameScore>
+                    ) : (
+                        <StyledGameScore onClick={() => onIncreaseScore('tie', 'hd')}>
+                            {teamB.tieScore}
+                        </StyledGameScore>
+                    )}
                 </StyledBoardRow>
             </StyledScoreBoardContainer>
-            <StyledMatchPointText>{isMatchPoint && 'Match Point'}</StyledMatchPointText>
         </StyledScoreBoardWrapper>
     );
 }

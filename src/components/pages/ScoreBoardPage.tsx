@@ -8,8 +8,10 @@ import {
     toggleServeTurn,
     increaseGameScore,
     increaseGamePoint,
+    toggleTiebreak,
+    increaseTieScore,
 } from '../actions';
-import { Team } from '../../interface/team';
+import { Team, Score } from '../../interface/team';
 import SettingBox from '../molecules/SettingBox';
 import { TENNIS_GAME_POINT } from '../../constants/game';
 import { downloadImage } from '../../helpers/htmlToImage';
@@ -19,7 +21,7 @@ function ScoreBoardPage() {
     const { state, dispatch } = useContext(GlobalContext);
 
     console.log(state, `from scorebord page`);
-    const { teamA, teamB, isMatchPoint } = state;
+    const { teamA, teamB, isMatchPoint, isTieBreak } = state;
 
     const handleMatchChange = (value: boolean) => {
         dispatch(toggleMatchPoint(value));
@@ -28,8 +30,9 @@ function ScoreBoardPage() {
     const handleServeChange = (team: Team) => {
         dispatch(toggleServeTurn(team));
     };
-    const handleIncreaseScore = (team: Team) => {
-        dispatch(increaseGameScore(team));
+    const handleIncreaseScore = (type: Score, team: Team) => {
+        console.log(type, team);
+        type === 'normal' ? dispatch(increaseGameScore(team)) : dispatch(increaseTieScore(team));
     };
 
     const handleImagePrint = () => {
@@ -47,6 +50,13 @@ function ScoreBoardPage() {
             dispatch(increaseGamePoint('hd'));
         }
     }, [teamA.gameScore, teamB.gameScore, dispatch]);
+
+    useEffect(() => {
+        // Tiebreak
+        if (teamA.gamePoint === 5 && teamB.gamePoint === 5) {
+            dispatch(toggleTiebreak(true));
+        }
+    }, [teamA.gamePoint, teamB.gamePoint, dispatch]);
     return (
         <>
             <PageHeader
@@ -61,6 +71,7 @@ function ScoreBoardPage() {
                 <ScoreBoard
                     onIncreaseScore={handleIncreaseScore}
                     isMatchPoint={isMatchPoint}
+                    isTieBreak={isTieBreak}
                     teamA={teamA}
                     teamB={teamB}
                     htmlRef={scoreBoardRef}

@@ -8,19 +8,22 @@ import {
     TOGGLE_SERVE_TURN,
     INCREASE_GAME_POINT,
     TOGGLE_TIEBREAK,
+    INCREASE_TIE_SCORE,
 } from '../components/actions';
 
 const initialState: InitialStateTypes = {
     teamA: {
         members: ['박종혁', '김진아'],
         gameScore: 0,
-        gamePoint: 0,
+        gamePoint: 5,
+        tieScore: 0,
         isServeTurn: true,
     },
     teamB: {
         members: ['김근태', '최미란'],
         gameScore: 0,
-        gamePoint: 0,
+        gamePoint: 5,
+        tieScore: 0,
         isServeTurn: false,
     },
     isTieBreak: false,
@@ -37,6 +40,7 @@ export type TeamObjectTypes = {
     members: string[];
     gameScore: number;
     gamePoint: number;
+    tieScore: number;
     isServeTurn: boolean;
 };
 
@@ -102,6 +106,27 @@ function GlobalProvider({ children }: GlobalProviderType) {
                             ...state.teamB,
                             gameScore: 0,
                             gamePoint: state.teamB.gamePoint + 1,
+                        },
+                    };
+                }
+                return state;
+            case INCREASE_TIE_SCORE:
+                if (action.payload === 'ds') {
+                    return {
+                        ...state,
+                        teamA: {
+                            ...state.teamA,
+                            tieScore: state.teamA.tieScore + 1,
+                        },
+                    };
+                }
+
+                if (action.payload === 'hd') {
+                    return {
+                        ...state,
+                        teamB: {
+                            ...state.teamB,
+                            tieScore: state.teamB.tieScore + 1,
                         },
                     };
                 }
