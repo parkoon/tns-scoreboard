@@ -1,5 +1,4 @@
-import React, { createContext, useState, useReducer } from 'react';
-import { Team } from '../interface/team';
+import React, { createContext, useReducer } from 'react';
 import {
     INCREASE_GAME_SCORE,
     DECREASE_GAME_SCORE,

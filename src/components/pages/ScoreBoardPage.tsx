@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef } from 'react';
-import { PageHeader, Button } from 'antd';
+import { PageHeader } from 'antd';
 import ScoreBoard from '../molecules/ScoreBoard';
 import Center from '../atoms/Center';
 import { GlobalContext } from '../../context/GlobalContext';
