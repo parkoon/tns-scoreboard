@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { PageHeader } from 'antd';
 import PlayerInputField from '../molecules/PlayerInputField';
 import styled from 'styled-components';
 import PlayerField from '../molecules/PlayerField';
 import Center from '../atoms/Center';
+import { GlobalContext } from '../../context/GlobalContext';
+import { setMember } from '../actions';
+import { Member } from '../../interface/team';
 
 const StyledPlayerFieldWrapper = styled.div`
     display: flex;
@@ -19,6 +22,12 @@ const StyledInputFieldWrapper = styled.div`
 `;
 
 function HomePage() {
+    const { dispatch } = useContext(GlobalContext);
+
+    const handleSubmit = (member: Member) => {
+        dispatch(setMember(member));
+    };
+
     return (
         <>
             <PageHeader
@@ -36,7 +45,7 @@ function HomePage() {
                     <PlayerField teamTitle="팀 행당" />
                 </StyledPlayerFieldWrapper>
                 <StyledInputFieldWrapper>
-                    <PlayerInputField />
+                    <PlayerInputField onSubmit={handleSubmit} />
                 </StyledInputFieldWrapper>
             </Center>
         </>

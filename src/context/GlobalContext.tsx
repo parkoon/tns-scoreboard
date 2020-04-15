@@ -53,8 +53,34 @@ function GlobalProvider({ children }: GlobalProviderType) {
                 return state;
             case TOGGLE_MATCH_POINT:
                 return state;
-            case SET_MEMBER:
+            case SET_MEMBER: {
+                const { team, player } = action.payload;
+                if (team === 'ds') {
+                    console.log('SET_MEMBER__DS');
+                    return {
+                        ...state,
+                        teamA: {
+                            ...state.teamA,
+                            members: [state.teamA.members[state.teamA.members.length - 1], player],
+                        },
+                    };
+                }
+
+                if (team === 'hd') {
+                    console.log('SET_MEMBER__HD');
+                    return {
+                        ...state,
+                        teamB: {
+                            ...state.teamB,
+                            members: [state.teamB.members[state.teamB.members.length - 1], player],
+                        },
+                    };
+                }
+                console.log('SET_MEMBER__ERROR');
+
                 return state;
+            }
+
             default:
                 return state;
         }
