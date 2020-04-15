@@ -1,7 +1,14 @@
 import React, { createContext, useState, useReducer } from 'react';
 import { Team } from '../interface/team';
+import {
+    INCREASE_GAME_SCORE,
+    DECREASE_GAME_SCORE,
+    TOGGLE_MATCH_POINT,
+    SET_MEMBER,
+    GlobalAction,
+} from '../components/actions';
 
-const initialState: GlobalStateType = {
+const initialState: InitialStateType = {
     teamA: {
         members: [],
         gameScore: 0,
@@ -15,37 +22,21 @@ const initialState: GlobalStateType = {
     isMatchPoint: false,
 };
 
-type GlobalStateType = {
+type InitialStateType = {
     teamA: TeamType;
     teamB: TeamType;
     isMatchPoint: boolean;
 };
 type TeamType = {
-    members: [];
+    members: string[];
     gameScore: number;
     gamePoint: number;
 };
 
-type GlobalAction =
-    | ReturnType<typeof setMember>
-    | ReturnType<typeof toggleMatchPoint>
-    | ReturnType<typeof increaseGameScore>
-    | ReturnType<typeof decreaseGameScore>;
-
 export const GlobalContext = createContext<{
-    state: GlobalStateType;
+    state: InitialStateType;
     dispatch: React.Dispatch<any>;
 }>({ state: initialState, dispatch: () => null });
-
-export const SET_MEMBER = 'SET_MEMBER' as const;
-export const TOGGLE_MATCH_POINT = 'TOGGLE_MATCH_POINT' as const;
-export const INCREASE_GAME_SCORE = 'INCREASE_GAME_SCORE' as const;
-export const DECREASE_GAME_SCORE = 'DECREASE_GAME_SCORE' as const;
-
-const setMember = (payload: { team: Team; name: string }) => ({ type: SET_MEMBER, payload });
-const toggleMatchPoint = () => ({ type: TOGGLE_MATCH_POINT });
-const increaseGameScore = (team: Team) => ({ type: INCREASE_GAME_SCORE });
-const decreaseGameScore = (team: Team) => ({ type: DECREASE_GAME_SCORE });
 
 const { Provider } = GlobalContext;
 
@@ -54,7 +45,7 @@ type GlobalProviderType = {
 };
 
 function GlobalProvider({ children }: GlobalProviderType) {
-    const [state, dispatch] = useReducer((state: GlobalStateType, action: GlobalAction) => {
+    const [state, dispatch] = useReducer((state: InitialStateType, action: GlobalAction) => {
         switch (action.type) {
             case INCREASE_GAME_SCORE:
                 return state;

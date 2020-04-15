@@ -5,11 +5,14 @@ import './index.css';
 import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
 
 import App from './App';
+import GlobalProvider from './context/GlobalContext';
 
 ReactDOM.render(
     <React.StrictMode>
         <Router>
-            <App />
+            <GlobalProvider>
+                <App />
+            </GlobalProvider>
         </Router>
     </React.StrictMode>,
     document.getElementById('root')
