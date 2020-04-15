@@ -82,12 +82,20 @@ function GlobalProvider({ children }: GlobalProviderType) {
                             gameScore: 0,
                             gamePoint: state.teamA.gamePoint + 1,
                         },
+                        teamB: {
+                            ...state.teamB,
+                            gameScore: 0,
+                        },
                     };
                 }
 
                 if (action.payload === 'hd') {
                     return {
                         ...state,
+                        teamA: {
+                            ...state.teamA,
+                            gameScore: 0,
+                        },
                         teamB: {
                             ...state.teamB,
                             gameScore: 0,
