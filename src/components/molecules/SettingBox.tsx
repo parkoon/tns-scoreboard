@@ -15,13 +15,21 @@ type SettingBoxTypes = {
     onServeChange: (value: Team) => void;
     onMatchChange: (value: boolean) => void;
     onImagePrintClick: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
+    isMatchPoint: boolean;
+    serveTurn: Team;
 };
-function SettingBox({ onMatchChange, onServeChange, onImagePrintClick }: SettingBoxTypes) {
+function SettingBox({
+    onMatchChange,
+    onServeChange,
+    onImagePrintClick,
+    isMatchPoint = false,
+    serveTurn = 'ds',
+}: SettingBoxTypes) {
     return (
         <StyledSettingBoxWrapper>
-            <MatchPointSwitch onChange={onMatchChange} />
+            <MatchPointSwitch checked={isMatchPoint} onChange={onMatchChange} />
             <Spacing />
-            <ServeTurnRadio onChange={onServeChange} />
+            <ServeTurnRadio serveTurn={serveTurn} onChange={onServeChange} />
             <Spacing />
             <Spacing />
             <Button size="large" block icon={<FileJpgOutlined />} onClick={onImagePrintClick}>

@@ -18,13 +18,14 @@ const StyledSwitch = styled.div`
 
 type MatchPointSwitchTypes = {
     onChange: (value: boolean) => void;
+    checked: boolean;
 };
-function MatchPointSwitch({ onChange }: MatchPointSwitchTypes) {
+function MatchPointSwitch({ onChange, checked = false }: MatchPointSwitchTypes) {
     return (
         <StyledSwitchWrapper>
             <SwitchTitle>매치 포인트</SwitchTitle>
             <StyledSwitch>
-                <Switch onChange={onChange} />
+                <Switch checked={checked} onChange={onChange} />
             </StyledSwitch>
         </StyledSwitchWrapper>
     );

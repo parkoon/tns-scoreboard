@@ -12,8 +12,6 @@ class RedoUndo {
     take(data: any) {
         this.undoStack.push(serialize(data));
         this.redoStack = [];
-
-        console.log('take', this.undoStack);
     }
 
     undo(data: any) {

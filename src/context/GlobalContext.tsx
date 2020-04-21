@@ -296,7 +296,7 @@ function GlobalProvider({ children }: GlobalProviderType) {
         // console.log(eval('(' + serialize(state) + ')'));
         // console.log('=========');
         // take(state);
-        redoUndo.take(state);
+        // redoUndo.take(state);
     }, [state]);
 
     return <Provider value={{ state, dispatch }}>{children}</Provider>;

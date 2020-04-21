@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from 'react';
+import React, { useContext, useEffect, useRef, useCallback } from 'react';
 import { PageHeader } from 'antd';
 import ScoreBoard from '../molecules/ScoreBoard';
 import Center from '../atoms/Center';
@@ -32,6 +32,8 @@ function ScoreBoardPage() {
     const { state, dispatch } = useContext(GlobalContext);
     const { theme, setTheme } = useTheme()!;
 
+    const attached = useRef(false);
+
     console.log(state, `from scorebord page`);
     const { teamA, teamB, isMatchPoint, isTieBreak, isDuce } = state;
 
@@ -61,6 +63,55 @@ function ScoreBoardPage() {
         history.push('/');
     };
 
+    const handleKeyEvent = useCallback(
+        (e: KeyboardEvent) => {
+            // 81-q 87-w 65-a 83-s 1-49 2-50 13-enter
+            const { keyCode } = e;
+
+            console.log('isTieBreak', isTieBreak);
+            switch (keyCode) {
+                case 81:
+                    isTieBreak
+                        ? handleIncreaseScore('tie', 'ds')
+                        : handleIncreaseScore('normal', 'ds');
+                    return;
+                case 87:
+                    isTieBreak
+                        ? handleIncreaseScore('tie', 'hd')
+                        : handleIncreaseScore('normal', 'hd');
+
+                    return;
+                case 65:
+                    isTieBreak
+                        ? handleDecreaseScore('tie', 'ds')
+                        : handleDecreaseScore('normal', 'ds');
+                    return;
+                case 83:
+                    isTieBreak
+                        ? handleDecreaseScore('tie', 'hd')
+                        : handleDecreaseScore('normal', 'hd');
+                    return;
+                case 49:
+                    handleServeChange('ds');
+                    return;
+                case 50:
+                    handleServeChange('hd');
+                    return;
+                case 51:
+                    handleMatchChange(true);
+                    return;
+                case 52:
+                    handleMatchChange(false);
+                    return;
+                case 13:
+                    handleImagePrint();
+                    return;
+            }
+            console.log('1', e.keyCode);
+        },
+        [isTieBreak]
+    );
+
     useEffect(() => {
         if (teamA.gameScore === TENNIS_GAME_POINT.length) {
             return dispatch(increaseGamePoint('ds'));
@@ -75,6 +126,10 @@ function ScoreBoardPage() {
             return dispatch(decreaseGamePoint('hd'));
         }
     }, [teamA.gameScore, teamB.gameScore, dispatch]);
+
+    useEffect(() => {
+        window.addEventListener('keyup', handleKeyEvent);
+    }, []);
 
     useEffect(() => {
         // 타이 브레이크 시작
@@ -117,6 +172,8 @@ function ScoreBoardPage() {
                     themeType={theme}
                 />
                 <SettingBox
+                    isMatchPoint={isMatchPoint}
+                    serveTurn={teamA.isServeTurn ? 'ds' : 'hd'}
                     onServeChange={handleServeChange}
                     onMatchChange={handleMatchChange}
                     onImagePrintClick={handleImagePrint}

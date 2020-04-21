@@ -20,8 +20,9 @@ const StyledRadio = styled.div`
 
 type MatchPointSwitchTypes = {
     onChange: (value: Team) => void;
+    serveTurn: Team;
 };
-function ServeTurnRadio({ onChange }: MatchPointSwitchTypes) {
+function ServeTurnRadio({ onChange, serveTurn }: MatchPointSwitchTypes) {
     const [value, setValue] = useState('ds');
 
     const hanleChange = (e: RadioChangeEvent) => {
@@ -34,7 +35,7 @@ function ServeTurnRadio({ onChange }: MatchPointSwitchTypes) {
         <StyledRadioWrapper>
             <RadioTitle>서브권</RadioTitle>
             <StyledRadio>
-                <Radio.Group onChange={hanleChange} value={value}>
+                <Radio.Group onChange={hanleChange} value={serveTurn}>
                     <Radio value="ds">덕소</Radio>
                     <Radio value="hd">행당</Radio>
                 </Radio.Group>
