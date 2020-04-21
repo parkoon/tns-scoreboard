@@ -5,7 +5,7 @@ export const htmlToCanvas = (html: HTMLElement) => {
     html2canvas(html).then(function (canvas) {
         document.body.appendChild(canvas);
         const dataUrl = canvas.toDataURL();
-        download(dataUrl, 'my-node.png');
+        download(dataUrl, 'tennis_scoreboard.png');
         console.log(canvas);
     });
 };
