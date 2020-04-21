@@ -9,6 +9,11 @@ import { THEME_COLOR } from '../../constants/theme';
 
 const StyledScoreBoardWrapper = styled.div`
     margin-bottom: 24px;
+    background: transparent;
+
+    /* width: 380px; */
+    /* height: 120px; */
+    padding: 20px;
 `;
 const StyledScoreBoardContainer = styled.div`
     width: 100%;
