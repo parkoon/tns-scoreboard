@@ -102,6 +102,7 @@ type ScoreBoardTypes = {
     isMatchPoint?: boolean;
     isTieBreak?: boolean;
     onIncreaseScore: (type: Score, team: Team) => void;
+    onDecreaseScore: (type: Score, team: Team) => void;
     teamA: TeamObjectTypes;
     teamB: TeamObjectTypes;
     htmlRef: Ref<HTMLDivElement>;
@@ -109,6 +110,7 @@ type ScoreBoardTypes = {
 };
 function ScoreBoard({
     onIncreaseScore,
+    onDecreaseScore,
     isMatchPoint = false,
     isTieBreak = false,
     teamA,
@@ -135,6 +137,10 @@ function ScoreBoard({
                         <StyledGameScore
                             themeType={themeType}
                             onClick={() => onIncreaseScore('normal', 'ds')}
+                            onContextMenu={(e) => {
+                                e.preventDefault();
+                                onDecreaseScore('normal', 'ds');
+                            }}
                         >
                             {TENNIS_GAME_POINT[teamA.gameScore]}
                         </StyledGameScore>
@@ -142,6 +148,10 @@ function ScoreBoard({
                         <StyledGameScore
                             themeType={themeType}
                             onClick={() => onIncreaseScore('tie', 'ds')}
+                            onContextMenu={(e) => {
+                                e.preventDefault();
+                                onDecreaseScore('tie', 'ds');
+                            }}
                         >
                             {teamA.tieScore}
                         </StyledGameScore>
@@ -156,6 +166,10 @@ function ScoreBoard({
                         <StyledGameScore
                             themeType={themeType}
                             onClick={() => onIncreaseScore('normal', 'hd')}
+                            onContextMenu={(e) => {
+                                e.preventDefault();
+                                onDecreaseScore('normal', 'hd');
+                            }}
                         >
                             {TENNIS_GAME_POINT[teamB.gameScore]}
                         </StyledGameScore>
@@ -163,6 +177,10 @@ function ScoreBoard({
                         <StyledGameScore
                             themeType={themeType}
                             onClick={() => onIncreaseScore('tie', 'hd')}
+                            onContextMenu={(e) => {
+                                e.preventDefault();
+                                onDecreaseScore('tie', 'hd');
+                            }}
                         >
                             {teamB.tieScore}
                         </StyledGameScore>

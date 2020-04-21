@@ -11,6 +11,9 @@ import {
     toggleTiebreak,
     increaseTieScore,
     toggleDuce,
+    decreaseGameScore,
+    decreaseTieScore,
+    decreaseGamePoint,
 } from '../actions';
 import { Team, Score } from '../../interface/team';
 import SettingBox from '../molecules/SettingBox';
@@ -42,6 +45,9 @@ function ScoreBoardPage() {
     const handleIncreaseScore = (type: Score, team: Team) => {
         type === 'normal' ? dispatch(increaseGameScore(team)) : dispatch(increaseTieScore(team));
     };
+    const handleDecreaseScore = (type: Score, team: Team) => {
+        type === 'normal' ? dispatch(decreaseGameScore(team)) : dispatch(decreaseTieScore(team));
+    };
 
     const handleImagePrint = () => {
         if (scoreBoardRef.current) {
@@ -57,10 +63,16 @@ function ScoreBoardPage() {
 
     useEffect(() => {
         if (teamA.gameScore === TENNIS_GAME_POINT.length) {
-            dispatch(increaseGamePoint('ds'));
+            return dispatch(increaseGamePoint('ds'));
+        }
+        if (teamA.gameScore < 0) {
+            return dispatch(decreaseGamePoint('ds'));
         }
         if (teamB.gameScore === TENNIS_GAME_POINT.length) {
-            dispatch(increaseGamePoint('hd'));
+            return dispatch(increaseGamePoint('hd'));
+        }
+        if (teamB.gameScore < 0) {
+            return dispatch(decreaseGamePoint('hd'));
         }
     }, [teamA.gameScore, teamB.gameScore, dispatch]);
 
@@ -96,6 +108,7 @@ function ScoreBoardPage() {
             <Center>
                 <ScoreBoard
                     onIncreaseScore={handleIncreaseScore}
+                    onDecreaseScore={handleDecreaseScore}
                     isMatchPoint={isMatchPoint}
                     isTieBreak={isTieBreak}
                     teamA={teamA}
