@@ -25,6 +25,7 @@ const boxShadow = `0px 0px 2px rgba(0, 0, 0, 0.2)`;
 const StyledPlayerName = styled.span<{ isServeTurn: boolean; themeType: ThemeType }>`
     display: flex;
     align-items: center;
+    justify-content: space-between;
     flex: 2;
     position: relative;
     font-size: 20px;
@@ -51,6 +52,10 @@ const StyledPlayerName = styled.span<{ isServeTurn: boolean; themeType: ThemeTyp
                 top: 0;
             }
         `}
+`;
+
+const StyledAd = styled.span`
+    font-size: 14px;
 `;
 
 const StyledGameScore = styled.span<{ themeType: ThemeType }>`
@@ -105,6 +110,7 @@ const StyledGameStatus = styled.div`
 type ScoreBoardTypes = {
     isMatchPoint?: boolean;
     isTieBreak?: boolean;
+    isDuce?: boolean;
     onIncreaseScore: (type: Score, team: Team) => void;
     onDecreaseScore: (type: Score, team: Team) => void;
     teamA: TeamObjectTypes;
@@ -117,6 +123,7 @@ function ScoreBoard({
     onDecreaseScore,
     isMatchPoint = false,
     isTieBreak = false,
+    isDuce = false,
     teamA,
     teamB,
     htmlRef,
@@ -125,7 +132,9 @@ function ScoreBoard({
     console.log('themeType', themeType);
     return (
         <StyledScoreBoardWrapper ref={htmlRef} id="score-board">
-            {isMatchPoint ? (
+            {isDuce ? (
+                <StyledGameStatus> DUCE </StyledGameStatus>
+            ) : isMatchPoint ? (
                 <StyledGameStatus> MATCH POINT</StyledGameStatus>
             ) : isTieBreak ? (
                 <StyledGameStatus>TIEBREAK</StyledGameStatus>
@@ -135,6 +144,7 @@ function ScoreBoard({
                 <StyledBoardRow>
                     <StyledPlayerName isServeTurn={teamA.isServeTurn} themeType={themeType}>
                         {teamA.members[0]} / {teamA.members[1]}
+                        {teamA.isAd && <StyledAd>AD</StyledAd>}
                     </StyledPlayerName>
                     <StyledGamePoint>{teamA.gamePoint}</StyledGamePoint>
                     {!isTieBreak ? (
@@ -164,6 +174,7 @@ function ScoreBoard({
                 <StyledBoardRow>
                     <StyledPlayerName themeType={themeType} isServeTurn={teamB.isServeTurn}>
                         {teamB.members[0]} / {teamB.members[1]}
+                        {teamB.isAd && <StyledAd>AD</StyledAd>}
                     </StyledPlayerName>
                     <StyledGamePoint>{teamB.gamePoint}</StyledGamePoint>
                     {!isTieBreak ? (

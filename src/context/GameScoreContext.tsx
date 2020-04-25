@@ -12,6 +12,7 @@ import {
     TOGGLE_DUCE,
     DECREASE_GAME_POINT,
     DECREASE_TIE_SCORE,
+    CHANGE_AD,
 } from '../components/actions';
 
 const initialState: InitialStateTypes = {
@@ -21,6 +22,7 @@ const initialState: InitialStateTypes = {
         gamePoint: 0,
         tieScore: 0,
         isServeTurn: true,
+        isAd: false,
     },
     teamB: {
         members: ['김근태', '최미란'],
@@ -28,6 +30,7 @@ const initialState: InitialStateTypes = {
         gamePoint: 0,
         tieScore: 0,
         isServeTurn: false,
+        isAd: false,
     },
     isTieBreak: false,
     isMatchPoint: false,
@@ -47,6 +50,7 @@ export type TeamObjectTypes = {
     gamePoint: number;
     tieScore: number;
     isServeTurn: boolean;
+    isAd: boolean;
 };
 
 export const GameScoreContext = createContext<{
@@ -63,6 +67,50 @@ type GameScoreProviderType = {
 function GameScoreProvider({ children }: GameScoreProviderType) {
     const [state, dispatch] = useReducer((state: InitialStateTypes, action: GlobalAction) => {
         switch (action.type) {
+            case CHANGE_AD:
+                if (action.payload === 'reset') {
+                    return {
+                        ...state,
+                        teamA: {
+                            ...state.teamA,
+                            isAd: false,
+                        },
+                        teamB: {
+                            ...state.teamB,
+                            isAd: false,
+                        },
+                    };
+                }
+                if (action.payload === 'ds') {
+                    return {
+                        ...state,
+                        teamA: {
+                            ...state.teamA,
+                            isAd: true,
+                        },
+                        teamB: {
+                            ...state.teamB,
+                            isAd: false,
+                        },
+                    };
+                }
+
+                if (action.payload === 'hd') {
+                    return {
+                        ...state,
+                        teamB: {
+                            ...state.teamB,
+                            isAd: true,
+                        },
+                        teamA: {
+                            ...state.teamA,
+                            isAd: false,
+                        },
+                    };
+                }
+
+                return state;
+
             case INCREASE_GAME_SCORE:
                 if (action.payload === 'ds') {
                     return {
@@ -210,7 +258,6 @@ function GameScoreProvider({ children }: GameScoreProviderType) {
                 }
                 return state;
 
-                return state;
             case TOGGLE_MATCH_POINT:
                 return {
                     ...state,
@@ -222,6 +269,7 @@ function GameScoreProvider({ children }: GameScoreProviderType) {
                     isTieBreak: action.payload,
                 };
             case TOGGLE_DUCE:
+                console.log('action.payload', action.payload);
                 return {
                     ...state,
                     isDuce: action.payload,

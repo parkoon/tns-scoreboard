@@ -16,14 +16,15 @@ const StyledSwitch = styled.div`
     flex: 1;
 `;
 
-type MatchPointSwitchTypes = {
+type GameStateSwitchTypes = {
+    title: string;
     onChange: (value: boolean) => void;
     checked: boolean;
 };
-function MatchPointSwitch({ onChange, checked = false }: MatchPointSwitchTypes) {
+function GameStateSwitch({ title, onChange, checked = false }: GameStateSwitchTypes) {
     return (
         <StyledSwitchWrapper>
-            <SwitchTitle>매치 포인트</SwitchTitle>
+            <SwitchTitle>{title}</SwitchTitle>
             <StyledSwitch>
                 <Switch checked={checked} onChange={onChange} />
             </StyledSwitch>
@@ -31,4 +32,4 @@ function MatchPointSwitch({ onChange, checked = false }: MatchPointSwitchTypes) 
     );
 }
 
-export default MatchPointSwitch;
+export default GameStateSwitch;

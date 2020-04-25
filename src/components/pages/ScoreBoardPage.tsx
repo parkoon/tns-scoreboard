@@ -13,6 +13,7 @@ import {
     decreaseGameScore,
     decreaseTieScore,
     decreaseGamePoint,
+    changeAd,
 } from '../actions';
 import { Team, Score } from '../../interface/team';
 import SettingBox from '../molecules/SettingBox';
@@ -31,7 +32,7 @@ function ScoreBoardPage() {
     const { theme } = useTheme()!;
 
     console.log(state, `from scorebord page`);
-    const { teamA, teamB, isMatchPoint, isTieBreak } = state;
+    const { teamA, teamB, isMatchPoint, isTieBreak, isDuce } = state;
 
     const handleMatchChange = (value: boolean) => {
         dispatch(toggleMatchPoint(value));
@@ -40,6 +41,7 @@ function ScoreBoardPage() {
     const handleServeChange = (team: Team) => {
         dispatch(toggleServeTurn(team));
     };
+
     const handleIncreaseScore = (type: Score, team: Team) => {
         type === 'normal' ? dispatch(increaseGameScore(team)) : dispatch(increaseTieScore(team));
     };
@@ -162,12 +164,17 @@ function ScoreBoardPage() {
                     onDecreaseScore={handleDecreaseScore}
                     isMatchPoint={isMatchPoint}
                     isTieBreak={isTieBreak}
+                    isDuce={isDuce}
                     teamA={teamA}
                     teamB={teamB}
                     htmlRef={scoreBoardRef}
                     themeType={theme}
                 />
                 <SettingBox
+                    isDuce={isDuce}
+                    adTurn={teamA.isAd ? 'ds' : teamB.isAd ? 'hd' : 'reset'}
+                    onDuceChange={(value) => dispatch(toggleDuce(value))}
+                    onAdChange={(team: Team) => dispatch(changeAd(team))}
                     isMatchPoint={isMatchPoint}
                     serveTurn={teamA.isServeTurn ? 'ds' : 'hd'}
                     onServeChange={handleServeChange}
