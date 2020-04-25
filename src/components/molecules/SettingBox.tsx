@@ -18,7 +18,7 @@ type SettingBoxTypes = {
     onAdChange: (value: Team) => void;
     onImagePrintClick: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
     isMatchPoint: boolean;
-    isDuce: boolean;
+    isDeuce: boolean;
     serveTurn: Team;
     adTurn: Team | 'reset';
 };
@@ -29,7 +29,7 @@ function SettingBox({
     onAdChange,
     onImagePrintClick,
     isMatchPoint = false,
-    isDuce = false,
+    isDeuce = false,
     serveTurn = 'ds',
     adTurn = 'reset',
 }: SettingBoxTypes) {
@@ -37,7 +37,7 @@ function SettingBox({
         <StyledSettingBoxWrapper>
             <GameStateSwitch title="매치 포인트" checked={isMatchPoint} onChange={onMatchChange} />
             <Spacing />
-            <GameStateSwitch title="듀스" checked={isDuce} onChange={onDuceChange} />
+            <GameStateSwitch title="듀스" checked={isDeuce} onChange={onDuceChange} />
             <Spacing />
             <GameStateRadio title="서브" setTurn={serveTurn} onChange={onServeChange} />
             <Spacing />

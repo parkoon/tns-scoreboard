@@ -32,7 +32,7 @@ function ScoreBoardPage() {
     const { theme } = useTheme()!;
 
     console.log(state, `from scorebord page`);
-    const { teamA, teamB, isMatchPoint, isTieBreak, isDuce } = state;
+    const { teamA, teamB, isMatchPoint, isTieBreak, isDeuce } = state;
 
     const handleMatchChange = (value: boolean) => {
         dispatch(toggleMatchPoint(value));
@@ -164,14 +164,14 @@ function ScoreBoardPage() {
                     onDecreaseScore={handleDecreaseScore}
                     isMatchPoint={isMatchPoint}
                     isTieBreak={isTieBreak}
-                    isDuce={isDuce}
+                    isDeuce={isDeuce}
                     teamA={teamA}
                     teamB={teamB}
                     htmlRef={scoreBoardRef}
                     themeType={theme}
                 />
                 <SettingBox
-                    isDuce={isDuce}
+                    isDeuce={isDeuce}
                     adTurn={teamA.isAd ? 'ds' : teamB.isAd ? 'hd' : 'reset'}
                     onDuceChange={(value) => dispatch(toggleDuce(value))}
                     onAdChange={(team: Team) => dispatch(changeAd(team))}

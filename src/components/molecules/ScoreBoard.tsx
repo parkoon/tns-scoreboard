@@ -110,7 +110,7 @@ const StyledGameStatus = styled.div`
 type ScoreBoardTypes = {
     isMatchPoint?: boolean;
     isTieBreak?: boolean;
-    isDuce?: boolean;
+    isDeuce?: boolean;
     onIncreaseScore: (type: Score, team: Team) => void;
     onDecreaseScore: (type: Score, team: Team) => void;
     teamA: TeamObjectTypes;
@@ -123,7 +123,7 @@ function ScoreBoard({
     onDecreaseScore,
     isMatchPoint = false,
     isTieBreak = false,
-    isDuce = false,
+    isDeuce = false,
     teamA,
     teamB,
     htmlRef,
@@ -132,8 +132,8 @@ function ScoreBoard({
     console.log('themeType', themeType);
     return (
         <StyledScoreBoardWrapper ref={htmlRef} id="score-board">
-            {isDuce ? (
-                <StyledGameStatus> DUCE </StyledGameStatus>
+            {isDeuce ? (
+                <StyledGameStatus> DEUCE </StyledGameStatus>
             ) : isMatchPoint ? (
                 <StyledGameStatus> MATCH POINT</StyledGameStatus>
             ) : isTieBreak ? (

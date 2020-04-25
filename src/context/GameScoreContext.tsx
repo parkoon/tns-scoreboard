@@ -34,7 +34,7 @@ const initialState: InitialStateTypes = {
     },
     isTieBreak: false,
     isMatchPoint: false,
-    isDuce: false,
+    isDeuce: false,
 };
 
 type InitialStateTypes = {
@@ -42,7 +42,7 @@ type InitialStateTypes = {
     teamB: TeamObjectTypes;
     isMatchPoint: boolean;
     isTieBreak: boolean;
-    isDuce: boolean;
+    isDeuce: boolean;
 };
 export type TeamObjectTypes = {
     members: string[];
@@ -71,7 +71,7 @@ function GameScoreProvider({ children }: GameScoreProviderType) {
                 if (action.payload === 'reset') {
                     return {
                         ...state,
-                        isDuce: false,
+                        isDeuce: false,
                         teamA: {
                             ...state.teamA,
                             isAd: false,
@@ -85,7 +85,7 @@ function GameScoreProvider({ children }: GameScoreProviderType) {
                 if (action.payload === 'ds') {
                     return {
                         ...state,
-                        isDuce: false,
+                        isDeuce: false,
                         teamA: {
                             ...state.teamA,
                             isAd: true,
@@ -278,7 +278,7 @@ function GameScoreProvider({ children }: GameScoreProviderType) {
                 console.log('action.payload', action.payload);
                 return {
                     ...state,
-                    isDuce: action.payload,
+                    isDeuce: action.payload,
                 };
             case TOGGLE_SERVE_TURN:
                 if (action.payload === 'ds') {
