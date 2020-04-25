@@ -71,6 +71,7 @@ function GameScoreProvider({ children }: GameScoreProviderType) {
                 if (action.payload === 'reset') {
                     return {
                         ...state,
+                        isDuce: false,
                         teamA: {
                             ...state.teamA,
                             isAd: false,
@@ -84,6 +85,7 @@ function GameScoreProvider({ children }: GameScoreProviderType) {
                 if (action.payload === 'ds') {
                     return {
                         ...state,
+                        isDuce: false,
                         teamA: {
                             ...state.teamA,
                             isAd: true,
