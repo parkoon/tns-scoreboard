@@ -2,7 +2,7 @@
 
 테니스 스토어를 일일히 입력하기 귀찮고, 테이블 만들기도 귀찮아 시작한 테니스 스코어 보드 생성기 프로젝트
 
-> https://www.youtube.com/channel/UCNUlUF5L8yM9wj4ZlJKXcMw
+> https://www.youtube.com/channel/UCNUlUF5L8yM9wj4ZlJKXcMws
 
 ## 데모 영상
 

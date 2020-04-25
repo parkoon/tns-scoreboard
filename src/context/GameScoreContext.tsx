@@ -139,10 +139,12 @@ function GameScoreProvider({ children }: GameScoreProviderType) {
                         teamA: {
                             ...state.teamA,
                             gameScore: 0,
+                            isAd: false,
                             gamePoint: state.teamA.gamePoint + 1,
                         },
                         teamB: {
                             ...state.teamB,
+                            isAd: false,
                             gameScore: 0,
                         },
                     };
@@ -153,10 +155,12 @@ function GameScoreProvider({ children }: GameScoreProviderType) {
                         ...state,
                         teamA: {
                             ...state.teamA,
+                            isAd: false,
                             gameScore: 0,
                         },
                         teamB: {
                             ...state.teamB,
+                            isAd: false,
                             gameScore: 0,
                             gamePoint: state.teamB.gamePoint + 1,
                         },
