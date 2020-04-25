@@ -1,8 +1,7 @@
 import React, { useContext, useEffect, useRef, useCallback } from 'react';
-import { PageHeader } from 'antd';
 import ScoreBoard from '../molecules/ScoreBoard';
 import Center from '../atoms/Center';
-import { GlobalContext } from '../../context/GlobalContext';
+import { GameScoreContext } from '../../context/GameScoreContext';
 import {
     toggleMatchPoint,
     toggleServeTurn,
@@ -18,24 +17,21 @@ import {
 import { Team, Score } from '../../interface/team';
 import SettingBox from '../molecules/SettingBox';
 import { TENNIS_GAME_POINT } from '../../constants/game';
-import { downloadImage, downloadImageToJPEG, appendImage } from '../../helpers/htmlToImage';
+import { downloadImage } from '../../helpers/htmlToImage';
 import MovingArrow from '../atoms/MovingArrow';
 import { useHistory } from 'react-router-dom';
 
 import '../../helpers/htmlToCanvas';
-import { htmlToCanvas } from '../../helpers/htmlToCanvas';
 import { useTheme } from '../../context/ThemeContext';
 
 function ScoreBoardPage() {
     const scoreBoardRef = useRef<HTMLDivElement>(null);
     const history = useHistory();
-    const { state, dispatch } = useContext(GlobalContext);
-    const { theme, setTheme } = useTheme()!;
-
-    const attached = useRef(false);
+    const { state, dispatch } = useContext(GameScoreContext);
+    const { theme } = useTheme()!;
 
     console.log(state, `from scorebord page`);
-    const { teamA, teamB, isMatchPoint, isTieBreak, isDuce } = state;
+    const { teamA, teamB, isMatchPoint, isTieBreak } = state;
 
     const handleMatchChange = (value: boolean) => {
         dispatch(toggleMatchPoint(value));

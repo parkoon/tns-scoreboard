@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Radio } from 'antd';
 import styled from 'styled-components';
 import { RadioChangeEvent } from 'antd/lib/radio';
@@ -23,11 +23,8 @@ type MatchPointSwitchTypes = {
     serveTurn: Team;
 };
 function ServeTurnRadio({ onChange, serveTurn }: MatchPointSwitchTypes) {
-    const [value, setValue] = useState('ds');
-
     const hanleChange = (e: RadioChangeEvent) => {
         const { value } = e.target;
-        setValue(value);
         onChange(value);
     };
 

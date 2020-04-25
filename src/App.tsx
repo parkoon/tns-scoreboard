@@ -1,20 +1,6 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { Switch as RouteSwitch, Route } from 'react-router-dom';
-import {
-    Drawer,
-    Form,
-    Input,
-    Button,
-    Radio,
-    Select,
-    Cascader,
-    DatePicker,
-    InputNumber,
-    TreeSelect,
-    Switch,
-    Col,
-    Row,
-} from 'antd';
+import { Drawer, Radio, Row } from 'antd';
 import HomePage from './components/pages/HomePage';
 import ScoreBoardPage from './components/pages/ScoreBoardPage';
 import Setting from './components/atoms/Setting';

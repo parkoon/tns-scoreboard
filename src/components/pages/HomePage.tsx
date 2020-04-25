@@ -1,12 +1,11 @@
 import React, { useContext } from 'react';
-import { PageHeader } from 'antd';
 import { useHistory } from 'react-router-dom';
 
 import PlayerInputField from '../molecules/PlayerInputField';
 import styled from 'styled-components';
 import PlayerField from '../molecules/PlayerField';
 import Center from '../atoms/Center';
-import { GlobalContext } from '../../context/GlobalContext';
+import { GameScoreContext } from '../../context/GameScoreContext';
 import { setMember } from '../actions';
 import { Member } from '../../interface/team';
 import MovingArrow from '../atoms/MovingArrow';
@@ -26,7 +25,7 @@ const StyledInputFieldWrapper = styled.div`
 
 function HomePage() {
     const history = useHistory();
-    const { dispatch, state } = useContext(GlobalContext);
+    const { dispatch, state } = useContext(GameScoreContext);
     const { teamA, teamB } = state;
     console.log(state, `from home page`);
 

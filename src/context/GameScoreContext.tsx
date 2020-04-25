@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useEffect } from 'react';
+import React, { createContext, useReducer } from 'react';
 import {
     INCREASE_GAME_SCORE,
     DECREASE_GAME_SCORE,
@@ -13,8 +13,6 @@ import {
     DECREASE_GAME_POINT,
     DECREASE_TIE_SCORE,
 } from '../components/actions';
-
-import RedoUndo from '../helpers/redoUndo';
 
 const initialState: InitialStateTypes = {
     teamA: {
@@ -51,20 +49,18 @@ export type TeamObjectTypes = {
     isServeTurn: boolean;
 };
 
-export const GlobalContext = createContext<{
+export const GameScoreContext = createContext<{
     state: InitialStateTypes;
     dispatch: React.Dispatch<any>;
 }>({ state: initialState, dispatch: () => null });
 
-const { Provider } = GlobalContext;
+const { Provider } = GameScoreContext;
 
-type GlobalProviderType = {
+type GameScoreProviderType = {
     children: React.ReactNode;
 };
 
-let redoUndo: RedoUndo;
-
-function GlobalProvider({ children }: GlobalProviderType) {
+function GameScoreProvider({ children }: GameScoreProviderType) {
     const [state, dispatch] = useReducer((state: InitialStateTypes, action: GlobalAction) => {
         switch (action.type) {
             case INCREASE_GAME_SCORE:
@@ -288,18 +284,7 @@ function GlobalProvider({ children }: GlobalProviderType) {
         }
     }, initialState);
 
-    useEffect(() => {
-        redoUndo = new RedoUndo();
-    }, []);
-
-    useEffect(() => {
-        // console.log(eval('(' + serialize(state) + ')'));
-        // console.log('=========');
-        // take(state);
-        // redoUndo.take(state);
-    }, [state]);
-
     return <Provider value={{ state, dispatch }}>{children}</Provider>;
 }
 
-export default GlobalProvider;
+export default GameScoreProvider;

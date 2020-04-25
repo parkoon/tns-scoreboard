@@ -1,7 +1,6 @@
 import React, { Ref } from 'react';
 import styled, { css } from 'styled-components';
-import { ThunderboltFilled } from '@ant-design/icons';
-import { TeamObjectTypes } from '../../context/GlobalContext';
+import { TeamObjectTypes } from '../../context/GameScoreContext';
 import { Team, Score } from '../../interface/team';
 import { TENNIS_GAME_POINT } from '../../constants/game';
 import { ThemeType } from '../../interface/theme';
