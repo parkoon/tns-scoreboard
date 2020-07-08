@@ -31,7 +31,6 @@ function ScoreBoardPage() {
     const { state, dispatch } = useContext(GameScoreContext);
     const { theme } = useTheme()!;
 
-    console.log(state, `from scorebord page`);
     const { teamA, teamB, isMatchPoint, isTieBreak, isDeuce } = state;
 
     const handleMatchChange = (value: boolean) => {
@@ -125,9 +124,9 @@ function ScoreBoardPage() {
         }
     }, [teamA.gameScore, teamB.gameScore, dispatch]);
 
-    useEffect(() => {
-        window.addEventListener('keyup', handleKeyEvent);
-    }, []);
+    // useEffect(() => {
+    //     window.addEventListener('keyup', handleKeyEvent);
+    // }, []);
 
     useEffect(() => {
         // 타이 브레이크 시작

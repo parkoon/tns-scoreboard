@@ -1,10 +1,11 @@
-import React, { Ref } from 'react';
+import React, { Ref, useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import { TeamObjectTypes } from '../../context/GameScoreContext';
 import { Team, Score } from '../../interface/team';
 import { TENNIS_GAME_POINT } from '../../constants/game';
 import { ThemeType } from '../../interface/theme';
 import { THEME_COLOR } from '../../constants/theme';
+import { useTheme } from '../../context/ThemeContext';
 
 const StyledScoreBoardWrapper = styled.div`
     margin-bottom: 24px;
@@ -22,7 +23,7 @@ const StyledScoreBoardContainer = styled.div`
 
 const boxShadow = `0px 0px 2px rgba(0, 0, 0, 0.2)`;
 
-const StyledPlayerName = styled.span<{ isServeTurn: boolean; themeType: ThemeType }>`
+const StyledPlayerNameField = styled.span<{ isServeTurn: boolean; themeType: ThemeType }>`
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -51,6 +52,19 @@ const StyledPlayerName = styled.span<{ isServeTurn: boolean; themeType: ThemeTyp
                 left: 0;
                 top: 0;
             }
+        `}
+`;
+
+const StyledPlayerName = styled.span<{ selected?: boolean; color?: string }>`
+    cursor: pointer;
+
+    transition: 0.3s;
+
+    ${(props) =>
+        props.selected &&
+        css`
+            color: ${props.color || '#9696ff'};
+            font-weight: bold;
         `}
 `;
 
@@ -129,7 +143,10 @@ function ScoreBoard({
     htmlRef,
     themeType = 'clay',
 }: ScoreBoardTypes) {
-    console.log('themeType', themeType);
+    const [selectedUser, setSelectedUser] = useState('');
+
+    const { nameColor } = useTheme()!;
+
     return (
         <StyledScoreBoardWrapper ref={htmlRef} id="score-board">
             {isDeuce ? (
@@ -142,10 +159,26 @@ function ScoreBoard({
 
             <StyledScoreBoardContainer>
                 <StyledBoardRow>
-                    <StyledPlayerName isServeTurn={teamA.isServeTurn} themeType={themeType}>
-                        {teamA.members[0]} / {teamA.members[1]}
+                    <StyledPlayerNameField isServeTurn={teamA.isServeTurn} themeType={themeType}>
+                        <div>
+                            <StyledPlayerName
+                                color={nameColor}
+                                selected={selectedUser === teamA.members[0]}
+                                onClick={() => setSelectedUser(teamA.members[0])}
+                            >
+                                {teamA.members[0]}
+                            </StyledPlayerName>{' '}
+                            /{' '}
+                            <StyledPlayerName
+                                color={nameColor}
+                                selected={selectedUser === teamA.members[1]}
+                                onClick={() => setSelectedUser(teamA.members[1])}
+                            >
+                                {teamA.members[1]}
+                            </StyledPlayerName>
+                        </div>
                         {teamA.isAd && <StyledAd>AD</StyledAd>}
-                    </StyledPlayerName>
+                    </StyledPlayerNameField>
                     <StyledGamePoint>{teamA.gamePoint}</StyledGamePoint>
                     {!isTieBreak ? (
                         <StyledGameScore
@@ -172,10 +205,26 @@ function ScoreBoard({
                     )}
                 </StyledBoardRow>
                 <StyledBoardRow>
-                    <StyledPlayerName themeType={themeType} isServeTurn={teamB.isServeTurn}>
-                        {teamB.members[0]} / {teamB.members[1]}
+                    <StyledPlayerNameField themeType={themeType} isServeTurn={teamB.isServeTurn}>
+                        <div>
+                            <StyledPlayerName
+                                color={nameColor}
+                                selected={selectedUser === teamB.members[0]}
+                                onClick={() => setSelectedUser(teamB.members[0])}
+                            >
+                                {teamB.members[0]}
+                            </StyledPlayerName>{' '}
+                            /{' '}
+                            <StyledPlayerName
+                                color={nameColor}
+                                selected={selectedUser === teamB.members[1]}
+                                onClick={() => setSelectedUser(teamB.members[1])}
+                            >
+                                {teamB.members[1]}
+                            </StyledPlayerName>
+                        </div>
                         {teamB.isAd && <StyledAd>AD</StyledAd>}
-                    </StyledPlayerName>
+                    </StyledPlayerNameField>
                     <StyledGamePoint>{teamB.gamePoint}</StyledGamePoint>
                     {!isTieBreak ? (
                         <StyledGameScore
