@@ -36,7 +36,7 @@ const StyledPlayerNameField = styled.span<{ isServeTurn: boolean; themeType: The
     padding-left: 24px;
     background: ${(props) => THEME_COLOR[props.themeType].primary};
     margin-right: 7px;
-    min-width: 240px;
+    min-width: 250px;
     min-height: 45px;
     box-shadow: ${boxShadow};
 
@@ -160,7 +160,7 @@ function ScoreBoard({
             <StyledScoreBoardContainer>
                 <StyledBoardRow>
                     <StyledPlayerNameField isServeTurn={teamA.isServeTurn} themeType={themeType}>
-                        <div>
+                        <div style={{ width: '100%' }}>
                             <StyledPlayerName
                                 color={nameColor}
                                 selected={selectedUser === teamA.members[0]}
@@ -206,7 +206,7 @@ function ScoreBoard({
                 </StyledBoardRow>
                 <StyledBoardRow>
                     <StyledPlayerNameField themeType={themeType} isServeTurn={teamB.isServeTurn}>
-                        <div>
+                        <div style={{ width: '100%' }}>
                             <StyledPlayerName
                                 color={nameColor}
                                 selected={selectedUser === teamB.members[0]}
